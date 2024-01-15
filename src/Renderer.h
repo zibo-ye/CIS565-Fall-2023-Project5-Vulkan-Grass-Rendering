@@ -55,13 +55,15 @@ private:
 
     VkDescriptorSetLayout cameraDescriptorSetLayout;
     VkDescriptorSetLayout modelDescriptorSetLayout;
-    VkDescriptorSetLayout timeDescriptorSetLayout;
+	VkDescriptorSetLayout timeDescriptorSetLayout;
+	VkDescriptorSetLayout computeDescriptorSetLayout;
     
     VkDescriptorPool descriptorPool;
 
     VkDescriptorSet cameraDescriptorSet;
-    std::vector<VkDescriptorSet> modelDescriptorSets;
-    VkDescriptorSet timeDescriptorSet;
+	std::vector<VkDescriptorSet> modelDescriptorSets;
+	VkDescriptorSet timeDescriptorSet;
+	std::vector<VkDescriptorSet> computeDescriptorSets;
 
     VkPipelineLayout graphicsPipelineLayout;
     VkPipelineLayout grassPipelineLayout;

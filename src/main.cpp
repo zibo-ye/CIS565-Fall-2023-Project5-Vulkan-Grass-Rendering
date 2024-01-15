@@ -1,4 +1,4 @@
-#include <vulkan/vulkan.h>
+#include <vulkan/vulkan.hpp>
 #include "Instance.h"
 #include "Window.h"
 #include "Renderer.h"
