@@ -8,6 +8,7 @@ layout(local_size_x = WORKGROUP_SIZE, local_size_y = 1, local_size_z = 1) in;
 
 const vec3 gE = vec3(0, -3, 0);
 const vec3 windNoiseMoveDirection = normalize(vec3(2, 0.2, 1)) * 0.7;
+const vec4 windParams = vec4(1.0f, 3.0f, 1.0f, 100.0f);
 
 #define PI 3.14159265359f
 
@@ -61,6 +62,70 @@ layout(set = 2, binding = 2) buffer CulledBlades {
 } culledBlades;
 
 
+//Perlin noise from https://github.com/SuboptimalEng/shader-tutorials/blob/main/05-perlin-noise/shader.frag
+vec2 randomVecOnGrids(uvec2 corner)
+{
+    const float omega=0.1f;
+    vec2 grad=vec2(dot(corner, vec2(562.23f,734.58)),dot(corner, vec2(213.86f,456.12f)));
+    grad = sin(grad);
+    grad = grad*347892.0f+totalTime*windParams.x;
+    return sin(grad);
+}
+
+vec2 smoothCubic(vec2 x) {
+  return x * x * (3.0 - x * 2.0);
+}
+
+float perlin(vec2 xy)
+{
+    vec2 uv = fract(xy);
+    uvec2 cell = uvec2(xy-uv);
+    vec2 grad00 = randomVecOnGrids(cell+uvec2(0,0));
+    vec2 grad01 = randomVecOnGrids(cell+uvec2(0,1));
+    vec2 grad10 = randomVecOnGrids(cell+uvec2(1,0));
+    vec2 grad11 = randomVecOnGrids(cell+uvec2(1,1));
+
+    vec2 vecTo00 = uv + vec2(0.0, 0.0);
+    vec2 vecTo01 = uv + vec2(0.0, 1.0);
+    vec2 vecTo10 = uv + vec2(1.0, 0.0);
+    vec2 vecTo11 = uv + vec2(1.0, 1.0);
+
+    float dot00 = dot(vecTo00, grad00);
+    float dot01 = dot(vecTo01, grad01);
+    float dot10 = dot(vecTo10, grad10);
+    float dot11 = dot(vecTo11, grad11);
+
+    uv = smoothCubic(uv);
+    return mix(mix(dot00, dot01, uv.x), mix(dot10, dot11, uv.x), uv.y);
+}
+
+vec3 getWindInfluence(vec3 pos)
+{
+    const float frequency = windParams.y;
+    const float amplitude = windParams.z;
+    float windX = amplitude * perlin(vec2(pos.x * frequency, pos.z * frequency));
+    float windZ = amplitude * perlin(vec2((pos.x + windParams.w) * frequency, (pos.z + windParams.w) * frequency)); 
+    return vec3(windX,0,windZ);
+}
+
+// height ratio
+float windFr(vec3 v2, vec3 v0, vec3 up, float h)
+{
+    return dot(v2-v0,up)/h;
+}
+
+// directional alignment
+float windFd(vec3 v2, vec3 v0)
+{
+    return 1-dot(normalize(getWindInfluence(v0)),normalize(v2-v0));
+}
+
+vec3 getWindForce(vec3 v2, vec3 v0, vec3 up, float h)
+{
+    return windFr(v2,v0,up,h)*windFd(v2,v0)*getWindInfluence(v0);
+}
+
+
 bool isInBounds(float value, float bounds) {
     return (value >= -bounds) && (value <= bounds);
 }
@@ -109,7 +174,7 @@ void main() {
 
     vec3 Fw = vec3(0);
 #if ENABLE_WIND
-	Fw = vec3(-5 * sin(totalTime), 0, 0);
+	Fw = getWindForce(v2, v0, up, h);
 #endif
 
 	//Calculate delta
