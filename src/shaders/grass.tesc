@@ -8,18 +8,40 @@ layout(set = 0, binding = 0) uniform CameraBufferObject {
     mat4 proj;
 } camera;
 
-// TODO: Declare tessellation control shader inputs and outputs
+struct tcs_in {
+    vec4 v1;
+    vec4 v2;
+    vec4 up;
+};
+
+layout(location = 0) in tcs_in tcs_data[];
+
+struct tes_in {
+    vec4 v1;
+    vec4 v2;
+    vec4 up;
+};
+
+layout(location = 0) out tes_in tes_data[];
+
+in gl_PerVertex
+{
+  vec4 gl_Position;
+} gl_in[gl_MaxPatchVertices];
 
 void main() {
 	// Don't move the origin location of the patch
     gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
 
-	// TODO: Write any shader outputs
+    tes_data[gl_InvocationID].v1 = tcs_data[gl_InvocationID].v1;
+    tes_data[gl_InvocationID].v2 = tcs_data[gl_InvocationID].v2;
+    tes_data[gl_InvocationID].up = tcs_data[gl_InvocationID].up;
 
-	gl_TessLevelInner[0] = 2.0;
-	gl_TessLevelInner[1] = 2.0;
-	gl_TessLevelOuter[0] = 2.0;
-	gl_TessLevelOuter[1] = 2.0;
-	gl_TessLevelOuter[2] = 2.0;
-	gl_TessLevelOuter[3] = 2.0;
+    float tessellationLevel = 3; //TODO: distance based tessellation
+    gl_TessLevelInner[0] = tessellationLevel;
+    gl_TessLevelInner[1] = tessellationLevel;
+    gl_TessLevelOuter[0] = tessellationLevel;
+    gl_TessLevelOuter[1] = tessellationLevel;
+    gl_TessLevelOuter[2] = tessellationLevel;
+    gl_TessLevelOuter[3] = tessellationLevel;
 }
