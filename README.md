@@ -1,12 +1,20 @@
 Vulkan Grass Rendering
 ==================================
 
-**University of Pennsylvania, CIS 565: GPU Programming and Architecture, Project 5**
+# Overview
+* My name: Zibo Ye
+* Environment: Windows 11 22631, AMD R7-5800H @ 3.2GHz (Up to 4.4Ghz) 32GB Mem, RTX 3080 Mobile 16GB
 
-* (TODO) YOUR NAME HERE
-* Tested on: (TODO) Windows 22, i7-2222 @ 2.22GHz 22GB, GTX 222 222MB (Moore 2222 Lab)
+Disclaimer: this demo is using infra code from [University of Pennsylvania, CIS 565: GPU Programming and Architecture, Project 5 - Vulkan Grass Rendering](https://github.com/CIS565-Fall-2023/Project5-Vulkan-Grass-Rendering). Kudos for their instructors and TAs to produce this infrastructure code for easier implementation!
 
-### (TODO: Your README)
 
-*DO NOT* leave the README to the last minute! It is a crucial part of the
-project, and we will not be able to grade you without a good README.
+# Reference
+Original Paper: [Responsive real-time grass rendering for general 3D scenes | Proceedings of the 21st ACM SIGGRAPH Symposium on Interactive 3D Graphics and Games](https://dl.acm.org/doi/10.1145/3023368.3023380)
+
+Original code (OpenGL): [klejah/ResponsiveGrassDemo: Demo of grass rendering technique: Responsive Real-Time Grass Rendering for General 3D Scenes](https://github.com/klejah/ResponsiveGrassDemo)
+
+Vulkan Infrastucture code: [University of Pennsylvania, CIS 565: GPU Programming and Architecture, Project 5 - Vulkan Grass Rendering](https://github.com/CIS565-Fall-2023/Project5-Vulkan-Grass-Rendering) and [corresponding project instruction slides](https://onedrive.live.com/view.aspx?resid=A6B78147D66DD722%2196872&authkey=!ALJknhlOAyWBM_U)
+
+
+Mesh shader implementation on DX12 and HLSL: [Procedural grass rendering - Mesh shaders on AMD RDNA™ graphics cards - AMD GPUOpen](https://gpuopen.com/learn/mesh_shaders/mesh_shaders-procedural_grass_rendering/)
+
