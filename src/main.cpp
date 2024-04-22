@@ -75,6 +75,9 @@ int main() {
     unsigned int glfwExtensionCount = 0;
     const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
+    // add_instance_extension
+    VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME;
+
     Instance* instance = new Instance(applicationName, glfwExtensionCount, glfwExtensions);
 
     VkSurfaceKHR surface;
@@ -82,14 +85,26 @@ int main() {
         throw std::runtime_error("Failed to create window surface");
     }
 
-    instance->PickPhysicalDevice({ VK_KHR_SWAPCHAIN_EXTENSION_NAME }, QueueFlagBit::GraphicsBit | QueueFlagBit::TransferBit | QueueFlagBit::ComputeBit | QueueFlagBit::PresentBit, surface);
+    instance->PickPhysicalDevice(
+        { 
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+			VK_KHR_SPIRV_1_4_EXTENSION_NAME,
+			VK_EXT_MESH_SHADER_EXTENSION_NAME,
+			VK_KHR_SHADER_FLOAT_CONTROLS_EXTENSION_NAME
+        }, 
+        QueueFlagBit::GraphicsBit | QueueFlagBit::TransferBit | QueueFlagBit::ComputeBit | QueueFlagBit::PresentBit, surface);
 
     VkPhysicalDeviceFeatures deviceFeatures = {};
     deviceFeatures.tessellationShader = VK_TRUE;
     deviceFeatures.fillModeNonSolid = VK_TRUE;
     deviceFeatures.samplerAnisotropy = VK_TRUE;
 
-    device = instance->CreateDevice(QueueFlagBit::GraphicsBit | QueueFlagBit::TransferBit | QueueFlagBit::ComputeBit | QueueFlagBit::PresentBit, deviceFeatures);
+	VkPhysicalDeviceMeshShaderFeaturesEXT enabledMeshShaderFeatures = {};
+	enabledMeshShaderFeatures.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT;
+	enabledMeshShaderFeatures.meshShader = VK_TRUE;
+	enabledMeshShaderFeatures.taskShader = VK_TRUE;
+
+    device = instance->CreateDevice(QueueFlagBit::GraphicsBit | QueueFlagBit::TransferBit | QueueFlagBit::ComputeBit | QueueFlagBit::PresentBit, deviceFeatures, &enabledMeshShaderFeatures);
 
     swapChain = device->CreateSwapChain(surface, 5);
 

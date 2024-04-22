@@ -32,6 +32,9 @@ public:
     void CreateGrassPipeline();
     void CreateComputePipeline();
 
+	PFN_vkCmdDrawMeshTasksEXT vkCmdDrawMeshTasksEXT{ VK_NULL_HANDLE };
+	void CreateGrassMeshShaderPipeline();
+
     void CreateFrameResources();
     void DestroyFrameResources();
     void RecreateFrameResources();
@@ -65,13 +68,16 @@ private:
 	VkDescriptorSet timeDescriptorSet;
 	std::vector<VkDescriptorSet> computeDescriptorSets;
 	std::vector<VkDescriptorSet> grassModelDescriptorSets;
+	std::vector<VkDescriptorSet> grassMeshShaderDescriptorSets;
 
     VkPipelineLayout graphicsPipelineLayout;
-    VkPipelineLayout grassPipelineLayout;
+	VkPipelineLayout grassPipelineLayout;
+	VkPipelineLayout grassMeshShaderPipelineLayout;
     VkPipelineLayout computePipelineLayout;
 
     VkPipeline graphicsPipeline;
-    VkPipeline grassPipeline;
+	VkPipeline grassPipeline;
+	VkPipeline grassMeshShaderPipeline;
     VkPipeline computePipeline;
 
     std::vector<VkImageView> imageViews;

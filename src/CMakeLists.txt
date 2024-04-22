@@ -18,6 +18,8 @@ file(GLOB_RECURSE SHADER_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/*.comp
     ${CMAKE_CURRENT_SOURCE_DIR}/*.tese
     ${CMAKE_CURRENT_SOURCE_DIR}/*.tesc
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.mesh
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.task
 )
 
 source_group("Shaders" FILES ${SHADER_SOURCES})
@@ -37,7 +39,7 @@ foreach(SHADER_SOURCE ${SHADER_SOURCES})
         get_filename_component(fname ${SHADER_SOURCE} NAME)
         add_custom_target(${fname}.spv
             COMMAND ${CMAKE_COMMAND} -E make_directory ${SHADER_DIR} && 
-            $ENV{VK_SDK_PATH}/Bin/glslangValidator.exe -V ${SHADER_SOURCE} -o ${SHADER_DIR}/${fname}.spv -g
+            $ENV{VK_SDK_PATH}/Bin/glslangValidator.exe -V ${SHADER_SOURCE} -o ${SHADER_DIR}/${fname}.spv -g --target-env spirv1.4
             SOURCES ${SHADER_SOURCE}
         )
         ExternalTarget("Shaders" ${fname}.spv)

@@ -18,3 +18,4 @@ Vulkan Infrastucture code: [University of Pennsylvania, CIS 565: GPU Programming
 
 Mesh shader implementation on DX12 and HLSL: [Procedural grass rendering - Mesh shaders on AMD RDNA™ graphics cards - AMD GPUOpen](https://gpuopen.com/learn/mesh_shaders/mesh_shaders-procedural_grass_rendering/)
 
+Mesh shader: [Vulkan/examples/meshshader/meshshader.cpp at eedfcc6b74fe9c50025eaceaa8ed70f44b14824a · SaschaWillems/Vulkan](https://github.com/SaschaWillems/Vulkan/blob/eedfcc6b74fe9c50025eaceaa8ed70f44b14824a/examples/meshshader/meshshader.cpp#L47)

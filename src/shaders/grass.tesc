@@ -6,6 +6,7 @@ layout(vertices = 1) out;
 layout(set = 0, binding = 0) uniform CameraBufferObject {
     mat4 view;
     mat4 proj;
+    mat4 invView;
 } camera;
 
 struct tcs_in {

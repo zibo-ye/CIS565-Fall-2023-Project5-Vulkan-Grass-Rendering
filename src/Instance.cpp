@@ -21,6 +21,7 @@ namespace {
         if (ENABLE_VALIDATION) {
             extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
         }
+        extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
 
         return extensions;
     }
@@ -46,10 +47,10 @@ Instance::Instance(const char* applicationName, unsigned int additionalExtension
     VkApplicationInfo appInfo = {};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     appInfo.pApplicationName = applicationName;
-    appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+    appInfo.applicationVersion = VK_MAKE_VERSION(1, 1, 0);
     appInfo.pEngineName = "No Engine";
-    appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
-    appInfo.apiVersion = VK_API_VERSION_1_0;
+    appInfo.engineVersion = VK_MAKE_VERSION(1, 1, 0);
+    appInfo.apiVersion = VK_API_VERSION_1_1;
     
     // --- Create Vulkan instance ---
     VkInstanceCreateInfo createInfo = {};
@@ -299,7 +300,7 @@ void Instance::PickPhysicalDevice(std::vector<const char*> deviceExtensions, Que
     vkGetPhysicalDeviceMemoryProperties(physicalDevice, &deviceMemoryProperties);
 }
 
-Device* Instance::CreateDevice(QueueFlagBits requiredQueues, VkPhysicalDeviceFeatures deviceFeatures) {
+Device* Instance::CreateDevice(QueueFlagBits requiredQueues, VkPhysicalDeviceFeatures deviceFeatures, void* pNextChain /*= nullptr*/) {
     std::set<int> uniqueQueueFamilies;
     bool queueSupport = true;
     for (unsigned int i = 0; i < requiredQueues.size(); ++i) {
@@ -343,6 +344,15 @@ Device* Instance::CreateDevice(QueueFlagBits requiredQueues, VkPhysicalDeviceFea
     } else {
         createInfo.enabledLayerCount = 0;
     }
+
+	VkPhysicalDeviceFeatures2 physicalDeviceFeatures2{};
+	if (pNextChain) {
+		physicalDeviceFeatures2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+		physicalDeviceFeatures2.features = deviceFeatures;
+		physicalDeviceFeatures2.pNext = pNextChain;
+        createInfo.pEnabledFeatures = nullptr;
+        createInfo.pNext = &physicalDeviceFeatures2;
+	}
 
     VkDevice vkDevice;
     // Create logical device
