@@ -5,12 +5,15 @@
 #include "Camera.h"
 #include "Scene.h"
 #include "Image.h"
+#include "utilities/ArgsParser.hpp"
+#include "GlobalDef.h"
 
 Device* device;
 SwapChain* swapChain;
 Renderer* renderer;
 Camera* camera;
 
+ApplicationArgs args;
 namespace {
     void resizeCallback(GLFWwindow* window, int width, int height) {
         if (width == 0 || height == 0) return;
@@ -63,14 +66,86 @@ namespace {
             previousY = yPosition;
         }
     }
+
+
+    void ParseArguments(const Utility::ArgsParser& argsParser)
+	{
+		auto windowSizeArg = argsParser.GetArg("drawing-size");
+		if (windowSizeArg.has_value()) {
+			args.windowSize.first = std::stoi(windowSizeArg.value()[0]);
+			args.windowSize.second = std::stoi(windowSizeArg.value()[1]);
+		}
+
+		auto modeArg = argsParser.GetArg("mode"); // "tess" or "mesh"
+		if (modeArg.has_value()) {
+			args.mode = modeArg.value()[0];
+		}
+
+		auto measureArg = argsParser.GetArg("measure");
+		if (measureArg.has_value()) {
+			args.measure = true;
+		}
+
+		auto limitFPSArg = argsParser.GetArg("limitfps");
+		if (limitFPSArg.has_value()) {
+			args.limitFPS = true;
+		}
+
+		auto bladeNumArg = argsParser.GetArg("bladeNumExponent");
+		if (bladeNumArg.has_value()) {
+			args.bladeNumExponent = std::stoi(bladeNumArg.value()[0]);
+			args.bladeNum = 1 << args.bladeNumExponent;
+		}
+	}
+
+	void Measure()
+	{
+		static std::vector<float> frameTimes;
+		static auto lastFrameTime = std::chrono::high_resolution_clock::now();
+		static auto lastOutputTime = std::chrono::high_resolution_clock::now();
+		static float deltaOutputTime = 0.0f;
+		auto currentTime = std::chrono::high_resolution_clock::now();
+		float frameTimeInMicrosec = std::chrono::duration<float, std::chrono::microseconds::period>(currentTime - lastFrameTime).count();
+		deltaOutputTime += frameTimeInMicrosec;
+
+		frameTimes.push_back(frameTimeInMicrosec);
+
+		// Calculate statistics every second or every N frames
+		if (deltaOutputTime >= 1000000.f) { // N is the number of frames after which you want to calculate statistics
+			float averageFrameTime = deltaOutputTime / frameTimes.size();
+			float fps = 1000000.0f / averageFrameTime;
+
+			// Sort frame times for percentile calculations
+			std::sort(frameTimes.begin(), frameTimes.end());
+			float p99 = frameTimes.at(std::lround(frameTimes.size() * 0.99) - 1);
+			float p95 = frameTimes.at(std::lround(frameTimes.size() * 0.95) - 1);
+			float p90 = frameTimes.at(std::lround(frameTimes.size() * 0.90) - 1);
+
+			// Calculate standard deviation
+			float sumOfSquaredDifferences = std::accumulate(frameTimes.begin(), frameTimes.end(), 0.0f,
+				[averageFrameTime](float acc, float ft) { return acc + (ft - averageFrameTime) * (ft - averageFrameTime); });
+			float std_dev = std::sqrt(sumOfSquaredDifferences / frameTimes.size());
+
+			std::cout << "FPS: " << fps << ", Avg Frame Time: " << averageFrameTime
+				<< "us , P99: " << p99 << "us , P95: " << p95 << "us , P90: " << p90
+				<< "us , Std Dev: " << std_dev << std::endl;
+
+			frameTimes.clear(); // Reset for next batch
+			deltaOutputTime = 0.0f;
+		}
+		lastFrameTime = std::chrono::high_resolution_clock::now(); // To eliminate the time taken to print statistics from the next batch
+	}
 }
 
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 
-int main() {
+int main(int argc, const char* argv[]) {
+    auto argsParser = Utility::ArgsParser(argc, argv);
+	ParseArguments(argsParser);
+
     static constexpr char* applicationName = "Vulkan Grass Rendering";
-    InitializeWindow(WINDOW_WIDTH, WINDOW_HEIGHT, applicationName);
+    InitializeWindow(args.windowSize.first, args.windowSize.second, applicationName);
 
     unsigned int glfwExtensionCount = 0;
     const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
@@ -108,7 +183,7 @@ int main() {
 
     swapChain = device->CreateSwapChain(surface, 5);
 
-    camera = new Camera(device, float(WINDOW_WIDTH) / float(WINDOW_HEIGHT));
+    camera = new Camera(device, float(args.windowSize.first) / float(args.windowSize.second));
 
     VkCommandPoolCreateInfo transferPoolInfo = {};
     transferPoolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
@@ -163,6 +238,7 @@ int main() {
 
     while (!ShouldQuit()) {
         glfwPollEvents();
+        Measure();
         scene->UpdateTime();
         renderer->Frame();
     }

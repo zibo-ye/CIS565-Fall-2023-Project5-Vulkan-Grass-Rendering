@@ -1,5 +1,9 @@
 file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
 
+# Append utilities folder src files to SOURCES
+file(GLOB UTILITIES_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/utilities/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/utilities/*.hpp)
+list(APPEND SOURCES ${UTILITIES_SOURCES})
+
 file(GLOB IMAGES
     ${CMAKE_CURRENT_SOURCE_DIR}/images/*.jpg
     ${CMAKE_CURRENT_SOURCE_DIR}/images/*.png

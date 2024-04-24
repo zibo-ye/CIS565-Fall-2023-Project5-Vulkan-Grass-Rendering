@@ -4,7 +4,6 @@
 #include <array>
 #include "Model.h"
 
-constexpr static unsigned int NUM_BLADES = 64; //1<<13
 constexpr static unsigned int NUM_BLADES_PER_GROUP = 32;
 constexpr static float MIN_HEIGHT = 1.3f;
 constexpr static float MAX_HEIGHT = 2.5f;

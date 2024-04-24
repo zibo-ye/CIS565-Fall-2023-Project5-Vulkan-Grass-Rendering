@@ -4,8 +4,6 @@
 #define WORKGROUP_SIZE 32
 layout(local_size_x = WORKGROUP_SIZE, local_size_y = 1, local_size_z = 1) in;
 
-#define NUM_BLADES 64
-
 const vec3 gE = vec3(0, -3, 0);
 const vec3 windNoiseMoveDirection = normalize(vec3(2, 0.2, 1)) * 0.7;
 const vec4 windParams = vec4(1.0f, 3.0f, 1.0f, 100.0f);
@@ -54,11 +52,11 @@ layout(set = 2, binding = 0) buffer NumBlades {
 } numBlades;
 
 layout(set = 2, binding = 1) buffer InputBlades {
-	Blade blades[NUM_BLADES];
+	Blade blades[];
 } inputBlades;
 
 layout(set = 2, binding = 2) buffer CulledBlades {
-	Blade blades[NUM_BLADES];
+	Blade blades[];
 } culledBlades;
 
 
