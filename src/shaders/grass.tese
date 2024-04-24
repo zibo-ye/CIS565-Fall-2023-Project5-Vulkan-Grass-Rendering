@@ -26,7 +26,7 @@ struct fragData {
 layout(location = 0) out fragData frag;
 
 float tParabola(float u, float v) {
-    return u * (1 - v * v);
+    return (u * 2 - 1) * (1 - v * v);
 }
 
 void main() {
@@ -41,21 +41,19 @@ void main() {
     const vec3 up = tes_data[0].up.xyz;
     const float w = tes_data[0].v2.w; // width
     
-    const vec3 a = mix(v0,v1,v);
-    const vec3 b = mix(v1,v2,v);
-    const vec3 c = mix(a,b,v);
-    const vec3 t1 = vec3(cos(theta), 0, sin(theta));  // bitangent (blade width)
-    const vec3 c0 = c - w * t1;                       // min x-axis point
-    const vec3 c1 = c + w * t1;                       // max x-axis point
-    const vec3 t0 = normalize(b - a);                 // tangent (blade height)
-    const vec3 n = normalize(cross(t0, t1));          // normal
+    const vec3 a = mix(v0,v1,v); //when v=1, a=v1
+    const vec3 b = mix(v1,v2,v); //when v=1, b=v2
+    const vec3 c = mix(a,b,v);   //when v=1, c=b=v2
+    const float t = tParabola(u, v); //the shape, [-(1-v^2),1-v^2] for v in [0,1], when v=1, t=0; when v=0, t=[-1,1] for u in [0,1]
 
-    const float t = tParabola(u, v);
-	const vec3 pos = mix(c0, c1, t);
+    const vec3 t1 = vec3(cos(theta), 0, sin(theta));  // bitangent (blade width)
+
+    const vec3 pos = c + w * t1 * t;
 
     gl_Position = camera.proj * camera.view * vec4(pos, 1.0);
 
     frag.pos = pos;
-    frag.normal = n;
+    const vec3 t0 = normalize(b - a);                 // tangent (blade height)
+    frag.normal = normalize(cross(t0, t1));          // normal calculation
     frag.uv = vec2(u, v);
 }

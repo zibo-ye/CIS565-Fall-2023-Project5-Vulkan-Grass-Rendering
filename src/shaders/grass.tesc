@@ -38,11 +38,11 @@ void main() {
     tes_data[gl_InvocationID].v2 = tcs_data[gl_InvocationID].v2;
     tes_data[gl_InvocationID].up = tcs_data[gl_InvocationID].up;
 
-    float tessellationLevel = 3; //TODO: distance based tessellation
-    gl_TessLevelInner[0] = tessellationLevel;
+    float tessellationLevel = 5; //TODO: distance based tessellation
+    gl_TessLevelInner[0] = 1;
     gl_TessLevelInner[1] = tessellationLevel;
     gl_TessLevelOuter[0] = tessellationLevel;
-    gl_TessLevelOuter[1] = tessellationLevel;
+    gl_TessLevelOuter[1] = 2;
     gl_TessLevelOuter[2] = tessellationLevel;
-    gl_TessLevelOuter[3] = tessellationLevel;
+    gl_TessLevelOuter[3] = 2;
 }

@@ -17,39 +17,136 @@ layout(set = 1, binding = 0) uniform ModelBufferObject {
     mat4 model;
 };
 
+layout(set = 2, binding = 0) buffer NumBlades {
+	  uint vertexCount;   // Write the number of blades remaining here
+	  uint instanceCount; // = 1
+	  uint firstVertex;   // = 0
+	  uint firstInstance; // = 0
+} numBlades;
+
+struct Blade {
+    vec4 v0;
+    vec4 v1;
+    vec4 v2;
+    vec4 up;
+};
+#define NUM_BLADES 64
+
+layout(set = 2, binding = 1) buffer InputBlades {
+	Blade blades[NUM_BLADES];
+} inputBlades;
+
+layout(set = 2, binding = 2) buffer CulledBlades {
+	Blade blades[NUM_BLADES];
+} culledBlades;
+
+layout(set = 3, binding = 0) uniform Time {
+    float deltaTime;
+    float totalTime;
+};
+
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
-layout(triangles, max_vertices = 3, max_primitives = 1) out;
+layout(triangles, max_vertices = 18, max_primitives = 20) out;
 
 layout(location = 0) out VertexOutput
 {
-	vec4 color;
+    vec3 pos;
+    vec3 normal;
+    vec2 uv;
 } vertexOutput[];
 
-const vec4[3] positions = {
-	vec4( 0.0, -1.0, 0.0, 1.0),
-	vec4(-1.0,  1.0, 0.0, 1.0),
-	vec4( 1.0,  1.0, 0.0, 1.0)
-};
+float tParabola(float u, float v) {
+    return u * (1 - v * v);
+}
 
-const vec4[3] colors = {
-	vec4(0.0, 1.0, 0.0, 1.0),
-	vec4(0.0, 0.0, 1.0, 1.0),
-	vec4(1.0, 0.0, 0.0, 1.0)
-};
+// Here, I'm trying to mimic the tessellator behavior in the mesh shader
+
+// float tessellationLevel = 5; //TODO: distance based tessellation
+// gl_TessLevelInner[0] = 1;
+// gl_TessLevelInner[1] = tessellationLevel;
+// gl_TessLevelOuter[0] = tessellationLevel;
+// gl_TessLevelOuter[1] = 2;
+// gl_TessLevelOuter[2] = tessellationLevel;
+// gl_TessLevelOuter[3] = 2;
+
+int calcVertexCount(int tesLevel) {
+	return 3*(tesLevel+1);
+}
+
+// Further: based on vertex index in a quad, calc the u,v of the vertex
+vec2 calcUV(int vertexIndex, int tesLevel) {
+	int totalVertices = calcVertexCount(tesLevel);
+	float u = float(vertexIndex % 3)/2.0;
+	float v = float(floor(vertexIndex / 3))/(tesLevel);
+	return vec2(u, v);
+}
+
+int calcPrimCount(int tesLevel) {
+	return 4*tesLevel;
+}
+
+// Per thread: 1 Blade (might be too less)
 
 void main()
 {
-	uint iid = gl_LocalInvocationID.x;
+	// uint iid = gl_LocalInvocationID.x;
+    const uint bladeIdx = gl_GlobalInvocationID.x;
 
-	vec4 offset = vec4(0.0, 0.0, gl_GlobalInvocationID.x, 0.0);
+	Blade thisBlade = inputBlades.blades[bladeIdx];
 
-	SetMeshOutputsEXT(3, 1);
-	mat4 mvp = camera.proj * camera.view * model;
-	gl_MeshVerticesEXT[0].gl_Position = mvp * (positions[0] + offset);
-	gl_MeshVerticesEXT[1].gl_Position = mvp * (positions[1] + offset);
-	gl_MeshVerticesEXT[2].gl_Position = mvp * (positions[2] + offset);
-	vertexOutput[0].color = colors[0];
-	vertexOutput[1].color = colors[1];
-	vertexOutput[2].color = colors[2];
-	gl_PrimitiveTriangleIndicesEXT[gl_LocalInvocationIndex] =  uvec3(0, 1, 2);
+	//local space
+    vec3 v0 = thisBlade.v0.xyz;
+    vec3 v1 = thisBlade.v1.xyz;
+    vec3 v2 = thisBlade.v2.xyz;
+    vec3 up = thisBlade.up.xyz;
+	
+	//world space (vertex shader)
+    v0 = (model * vec4(v0, 1.0)).xyz;
+    v1 = (model * vec4(v1, 1.0)).xyz;
+    v2 = (model * vec4(v2, 1.0)).xyz;
+    up = (model * vec4(up, 0.0)).xyz;
+
+    const float theta = thisBlade.v0.w; // rotation
+    const float h = thisBlade.v1.w; // height
+    const float w = thisBlade.v2.w; // width
+    const float stiffness = thisBlade.up.w; // stiffness
+
+	// tessellation level calculation (TCS)
+	const int tesLevel = 2;
+
+	int vertexCount = calcVertexCount(tesLevel);
+	int primCount = calcPrimCount(tesLevel);
+	SetMeshOutputsEXT(vertexCount, primCount);
+
+	// calculate the vertices of the blade (Simulate TES)
+	for (int i = 0; i < vertexCount; i++) {
+		vec2 uv = calcUV(i, tesLevel);
+		float u = uv.x;
+		float v = uv.y;
+
+		const vec3 a = mix(v0,v1,v); //when v=1, a=v1
+		const vec3 b = mix(v1,v2,v); //when v=1, b=v2
+		const vec3 c = mix(a,b,v);   //when v=1, c=b=v2
+		const float t = tParabola(u, v); //the shape, [-(1-v^2),1-v^2] for v in [0,1], when v=1, t=0; when v=0, t=[-1,1] for u in [0,1]
+
+		const vec3 t1 = vec3(cos(theta), 0, sin(theta));  // bitangent (blade width)
+
+		const vec3 pos = c + w * t1 * t;
+
+		gl_MeshVerticesEXT[i].gl_Position = camera.proj * camera.view * vec4(pos, 1.0);
+
+		vertexOutput[i].pos = pos;
+		vertexOutput[i].normal = normalize(cross(normalize(b - a), t1));          // normal calculation
+		vertexOutput[i].uv = uv;
+	}
+
+	// calculate the indices of the blade (Simulate TES)
+	for(int i = 0; i < tesLevel; i++) {
+		ivec3 indices = ivec3(0, 1, 2) + 3*i;
+		ivec3 indices_2 = ivec3(0, 1, 2) + 3*(i+1);
+		gl_PrimitiveTriangleIndicesEXT[4*i+0] = uvec3(indices.x,indices.y,indices_2.y);
+		gl_PrimitiveTriangleIndicesEXT[4*i+1] = uvec3(indices.x,indices_2.y,indices_2.x);
+		gl_PrimitiveTriangleIndicesEXT[4*i+2] = uvec3(indices.y,indices.z,indices_2.z);
+		gl_PrimitiveTriangleIndicesEXT[4*i+3] = uvec3(indices.y,indices_2.z,indices_2.y);
+	}
 }

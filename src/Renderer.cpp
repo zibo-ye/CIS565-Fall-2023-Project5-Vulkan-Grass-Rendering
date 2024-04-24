@@ -31,7 +31,7 @@ Renderer::Renderer(Device* device, SwapChain* swapChain, Scene* scene, Camera* c
 	CreateGraphicsPipeline();
 	CreateGrassPipeline();
 	CreateComputePipeline();
-	vkCmdDrawMeshTasksEXT = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdDrawMeshTasksEXT"));
+	vkCmdDrawMeshTasksEXTFunc = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdDrawMeshTasksEXT"));
 	CreateGrassMeshShaderPipeline();
 	RecordCommandBuffers();
 	RecordComputeCommandBuffer();
@@ -203,21 +203,21 @@ void Renderer::CreateComputeDescriptorSetLayout() {
 	uboLayoutBinding1.binding = 0;
 	uboLayoutBinding1.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 	uboLayoutBinding1.descriptorCount = 1;
-	uboLayoutBinding1.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+	uboLayoutBinding1.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT | VK_SHADER_STAGE_MESH_BIT_EXT;
 	uboLayoutBinding1.pImmutableSamplers = nullptr;
 
 	VkDescriptorSetLayoutBinding uboLayoutBinding2 = {};
 	uboLayoutBinding2.binding = 1;
 	uboLayoutBinding2.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 	uboLayoutBinding2.descriptorCount = 1;
-	uboLayoutBinding2.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+	uboLayoutBinding2.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT | VK_SHADER_STAGE_MESH_BIT_EXT;
 	uboLayoutBinding2.pImmutableSamplers = nullptr;
 
 	VkDescriptorSetLayoutBinding uboLayoutBinding3 = {};
 	uboLayoutBinding3.binding = 2;
 	uboLayoutBinding3.descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
 	uboLayoutBinding3.descriptorCount = 1;
-	uboLayoutBinding3.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+	uboLayoutBinding3.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT | VK_SHADER_STAGE_MESH_BIT_EXT;
 	uboLayoutBinding3.pImmutableSamplers = nullptr;
 
 	std::vector<VkDescriptorSetLayoutBinding> bindings = { uboLayoutBinding1,uboLayoutBinding2,uboLayoutBinding3 };
@@ -1118,7 +1118,7 @@ void Renderer::RecordCommandBuffers() {
 			vkCmdDrawIndexed(commandBuffers[i], static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 		}
 
-		//// Bind the grass pipeline
+		////// Bind the grass pipeline
 		//vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassPipeline);
 
 		//for (uint32_t j = 0; j < scene->GetBlades().size(); ++j) {
@@ -1139,12 +1139,19 @@ void Renderer::RecordCommandBuffers() {
 
 		for (uint32_t j = 0; j < scene->GetBlades().size(); ++j) {
 			// Bind the descriptor set for each grass blades model
-			vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 1, 1, &modelDescriptorSets[j], 0, nullptr); // temp borrow model descriptor set
-			//TODO: Bind the descriptor set for the mesh shader
-			//vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 1, 1, &grassMeshShaderDescriptorSets[j], 0, nullptr);
+			//vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 1, 1, &modelDescriptorSets[j], 0, nullptr); // temp borrow model descriptor set
+			vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 1, 1, &grassModelDescriptorSets[j], 0, nullptr); // temp borrow model descriptor set
+
+			// Bind the descriptor set for each blade patch
+			vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 2, 1, &computeDescriptorSets[j], 0, nullptr);
+
+			// Bind descriptor set for time uniforms
+			vkCmdBindDescriptorSets(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipelineLayout, 3, 1, &timeDescriptorSet, 0, nullptr);
 
 			// Draw
-			vkCmdDrawMeshTasksEXT(commandBuffers[i], 1, 1, 1);
+			//uint32_t groupCountX = (NUM_BLADES + WORKGROUP_SIZE - 1) / WORKGROUP_SIZE;
+			//vkCmdDrawMeshTasksEXTFunc(commandBuffers[i], NUM_BLADES, 1, 1);
+			vkCmdDrawMeshTasksEXTFunc(commandBuffers[i], 1, 1, 1);
 		}
 
 		// End render pass
@@ -1205,7 +1212,7 @@ void Renderer::CreateGrassMeshShaderPipeline()
 	// --- Set up programmable shaders ---
 	VkShaderModule meshShaderModule = ShaderModule::Create("shaders/meshshader.mesh.spv", logicalDevice);
 	VkShaderModule taskShaderModule = ShaderModule::Create("shaders/meshshader.task.spv", logicalDevice);
-	VkShaderModule fragShaderModule = ShaderModule::Create("shaders/meshshader.frag.spv", logicalDevice);
+	VkShaderModule fragShaderModule = ShaderModule::Create("shaders/grass.frag.spv", logicalDevice);
 
 	// Assign each shader module to the appropriate stage in the pipeline
 	VkPipelineShaderStageCreateInfo meshShaderStageInfo = {};
@@ -1310,7 +1317,7 @@ void Renderer::CreateGrassMeshShaderPipeline()
 	colorBlending.blendConstants[2] = 0.0f;
 	colorBlending.blendConstants[3] = 0.0f;
 
-	std::vector<VkDescriptorSetLayout> descriptorSetLayouts = { cameraDescriptorSetLayout, modelDescriptorSetLayout };
+	std::vector<VkDescriptorSetLayout> descriptorSetLayouts = { cameraDescriptorSetLayout, modelDescriptorSetLayout, computeDescriptorSetLayout, timeDescriptorSetLayout };
 
 	// Pipeline layout: used to specify uniform values
 	VkPipelineLayoutCreateInfo pipelineLayoutInfo = {};
