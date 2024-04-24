@@ -1,0 +1,390 @@
+/* Copyright (c) 2021, Sascha Willems
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ */
+
+#version 450
+#extension GL_EXT_mesh_shader : require
+
+layout(set = 0, binding = 0) uniform CameraBufferObject {
+    mat4 view;
+    mat4 proj;
+    mat4 invView;
+} camera;
+
+layout(set = 1, binding = 0) uniform ModelBufferObject {
+    mat4 model;
+};
+
+layout(set = 2, binding = 0) buffer NumBlades {
+	  uint vertexCount;   // Write the number of blades remaining here
+	  uint instanceCount; // = 1
+	  uint firstVertex;   // = 0
+	  uint firstInstance; // = 0
+} numBlades;
+
+struct Blade {
+    vec4 v0;
+    vec4 v1;
+    vec4 v2;
+    vec4 up;
+};
+
+layout(set = 2, binding = 1) buffer InputBlades {
+	Blade blades[];
+} inputBlades;
+
+layout(set = 2, binding = 2) buffer CulledBlades {
+	Blade blades[];
+} culledBlades;
+
+layout(set = 3, binding = 0) uniform Time {
+    float deltaTime;
+    float totalTime;
+	bool enableMeshShaderCompute;
+};
+
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
+#define BLADE_PER_THREAD 1
+
+layout(triangles, max_vertices = 18*BLADE_PER_THREAD, max_primitives = 20*BLADE_PER_THREAD) out;
+
+layout(location = 0) out VertexOutput
+{
+    vec3 pos;
+    vec3 normal;
+    vec2 uv;
+} vertexOutput[];
+
+float tParabola(float u, float v) {
+    return (u * 2 - 1) * (1 - v * v);
+}
+
+// Here, I'm trying to mimic the tessellator behavior in the mesh shader
+
+// float tessellationLevel = 5; //TODO: distance based tessellation
+// gl_TessLevelInner[0] = 1;
+// gl_TessLevelInner[1] = tessellationLevel;
+// gl_TessLevelOuter[0] = tessellationLevel;
+// gl_TessLevelOuter[1] = 2;
+// gl_TessLevelOuter[2] = tessellationLevel;
+// gl_TessLevelOuter[3] = 2;
+
+int calcVertexCount(int tesLevel) {
+	return 3*(tesLevel+1);
+}
+
+// Further: based on vertex index in a quad, calc the u,v of the vertex
+vec2 calcUV(int vertexIndex, int tesLevel) {
+	int totalVertices = calcVertexCount(tesLevel);
+	float u = float(vertexIndex % 3)/2.0;
+	float v = float(floor(vertexIndex / 3))/(tesLevel);
+	return vec2(u, v);
+}
+
+int calcPrimCount(int tesLevel) {
+	return 4*tesLevel;
+}
+
+
+
+// ---------- Compute Stage ------------//
+
+const vec3 gE = vec3(0, -3, 0);
+const vec3 windNoiseMoveDirection = normalize(vec3(2, 0.2, 1)) * 0.7;
+const vec4 windParams = vec4(1.0f, 3.0f, 1.0f, 100.0f);
+
+#define PI 3.14159265359f
+
+#define APPLY_FORCES 1
+#define ENABLE_RECOVERY 1
+#define ENABLE_GRAVITY 1
+#define ENABLE_WIND 1
+
+#define ENABLE_CULLING 1
+#define ENABLE_ORIENTATION_CULLING 1
+#define ENABLE_FRUSTUM_CULLING 1
+#define ENABLE_DISTANCE_CULLING 1
+
+#define ORIENTATION_CULLING_THRESHOLD 0.9
+#define FRUSTUM_CULLING_TOLERANCE 0.2
+#define DISTANCE_CULLING_DIST_MAX 60
+#define DISTANCE_CULLING_NUM_BUCKETS 8
+
+//Perlin noise from https://github.com/SuboptimalEng/shader-tutorials/blob/main/05-perlin-noise/shader.frag
+vec2 randomVecOnGrids(uvec2 corner)
+{
+    const float omega=0.1f;
+    vec2 grad=vec2(dot(corner, vec2(562.23f,734.58)),dot(corner, vec2(213.86f,456.12f)));
+    grad = sin(grad);
+    grad = grad*347892.0f+totalTime*windParams.x;
+    return sin(grad);
+}
+
+vec2 smoothCubic(vec2 x) {
+  return x * x * (3.0 - x * 2.0);
+}
+
+float perlin(vec2 xy)
+{
+    vec2 uv = fract(xy);
+    uvec2 cell = uvec2(xy-uv);
+    vec2 grad00 = randomVecOnGrids(cell+uvec2(0,0));
+    vec2 grad01 = randomVecOnGrids(cell+uvec2(0,1));
+    vec2 grad10 = randomVecOnGrids(cell+uvec2(1,0));
+    vec2 grad11 = randomVecOnGrids(cell+uvec2(1,1));
+
+    vec2 vecTo00 = uv + vec2(0.0, 0.0);
+    vec2 vecTo01 = uv + vec2(0.0, 1.0);
+    vec2 vecTo10 = uv + vec2(1.0, 0.0);
+    vec2 vecTo11 = uv + vec2(1.0, 1.0);
+
+    float dot00 = dot(vecTo00, grad00);
+    float dot01 = dot(vecTo01, grad01);
+    float dot10 = dot(vecTo10, grad10);
+    float dot11 = dot(vecTo11, grad11);
+
+    uv = smoothCubic(uv);
+    return mix(mix(dot00, dot01, uv.x), mix(dot10, dot11, uv.x), uv.y);
+}
+
+vec3 getWindInfluence(vec3 pos)
+{
+    const float frequency = windParams.y;
+    const float amplitude = windParams.z;
+    float windX = amplitude * perlin(vec2(pos.x * frequency, pos.z * frequency));
+    float windZ = amplitude * perlin(vec2((pos.x + windParams.w) * frequency, (pos.z + windParams.w) * frequency)); 
+    return vec3(windX,0,windZ);
+}
+
+// height ratio
+float windFr(vec3 v2, vec3 v0, vec3 up, float h)
+{
+    return dot(v2-v0,up)/h;
+}
+
+// directional alignment
+float windFd(vec3 v2, vec3 v0)
+{
+    return 1-dot(normalize(getWindInfluence(v0)),normalize(v2-v0));
+}
+
+vec3 getWindForce(vec3 v2, vec3 v0, vec3 up, float h)
+{
+    return windFr(v2,v0,up,h)*windFd(v2,v0)*getWindInfluence(v0);
+}
+
+
+bool isInBounds(float value, float bounds) {
+    return (value >= -bounds) && (value <= bounds);
+}
+
+bool isInFrustum(vec3 p) {
+    vec4 p_ = camera.proj * camera.view * vec4(p, 1);
+    float h = p_.w + FRUSTUM_CULLING_TOLERANCE;
+    return isInBounds(p_.x, h) && isInBounds(p_.y, h) && isInBounds(p_.z, h);
+}
+
+// Per thread: 1 Blade (might be too less)
+
+void main()
+{
+if (enableMeshShaderCompute)
+{
+    if (gl_GlobalInvocationID.x == 0) {
+        numBlades.vertexCount = 0;
+    }
+    barrier();
+}
+
+	// tessellation level calculation (TCS)
+	const int tesLevel = 5;
+
+	int vertexCount = calcVertexCount(tesLevel);
+	int primCount = calcPrimCount(tesLevel);
+	SetMeshOutputsEXT(vertexCount*BLADE_PER_THREAD, primCount*BLADE_PER_THREAD);
+
+	for(int j = 0; j < BLADE_PER_THREAD; j++)
+	{
+		// uint iid = gl_LocalInvocationID.x;
+		const uint bladeIdx = gl_GlobalInvocationID.x + j * BLADE_PER_THREAD;
+
+		vec3 v0 = vec3(0,0,0);
+		vec3 v1 = vec3(0,0,0);
+		vec3 v2 = vec3(0,0,0);
+		vec3 up = vec3(0,0,0);
+		float theta;
+		float h;
+		float w;
+		float stiffness;
+if (enableMeshShaderCompute)
+{
+		// Update the blade (compute shader)
+
+		Blade thisBlade = inputBlades.blades[bladeIdx];
+		v0 = thisBlade.v0.xyz;
+		v1 = thisBlade.v1.xyz;
+		v2 = thisBlade.v2.xyz;
+		up = thisBlade.up.xyz;
+
+		theta = thisBlade.v0.w; // rotation
+		h = thisBlade.v1.w; // height
+		w = thisBlade.v2.w; // width
+		stiffness = thisBlade.up.w; // stiffness
+
+		// -------------------------
+		// FORCES
+		// -------------------------
+
+		vec3 Fr = vec3(0);
+	#if ENABLE_RECOVERY
+		vec3 Iv2 = v0 + h * up;
+		Fr = (Iv2 - v2) * stiffness; //crippling effect omitted
+	#endif
+
+		vec3 Fg = vec3(0);
+	#if ENABLE_GRAVITY
+		vec3 f = vec3(cos(theta + PI * 0.25), 0, sin(theta + PI * 0.25));
+		vec3 gF = 0.25 * length(gE) * f;
+		Fg = gE + gF;
+	#endif
+
+		vec3 Fw = vec3(0);
+	#if ENABLE_WIND
+		Fw = getWindForce(v2, v0, up, h);
+	#endif
+
+		//Calculate delta
+		vec3 delta = (Fr + Fg + Fw) * deltaTime;
+
+		v2 += delta;
+
+		//State Validation, make sure v2 is above the local plane
+		v2 = v2 - up * min(up * (v2 - v0), 0);
+		
+		//Calculate v1
+		float lProj = length(v2 - v0 - up * dot(v2 - v0, up));
+		v1 = v0 + h * up * max(1 - lProj / h, 0.05 * max(lProj / h, 1));
+
+		float L0 = distance(v0, v2);
+		float L1 = distance(v0, v1) + distance(v1, v2);
+		float L = (2.0f * L0 + L1) / 3.0f; // http://steve.hollasch.net/cgindex/curves/cbezarclen.html, n=2
+
+		float r = h / L;
+		vec3 v1_corr = v0 + r * (v1 - v0);
+		vec3 v2_corr = v1_corr + r * (v2 - v1);
+
+	#if APPLY_FORCES
+		thisBlade.v1.xyz = v1_corr.xyz;
+		thisBlade.v2.xyz = v2_corr.xyz;
+		inputBlades.blades[bladeIdx] = thisBlade;
+	#endif
+
+		// -------------------------
+		// CULLING
+		// -------------------------
+
+	#if ENABLE_CULLING
+	#if ENABLE_ORIENTATION_CULLING
+		const vec3 dir_c = vec3(camera.view[0][2], camera.view[1][2], camera.view[2][2]);
+		vec3 dir_b = vec3(cos(theta), 0, sin(theta));
+		if (abs(dot(dir_c, dir_b)) > ORIENTATION_CULLING_THRESHOLD) {
+			continue;
+		}
+	#endif
+
+	#if ENABLE_FRUSTUM_CULLING
+		vec3 m = mix(mix(v0, v1, 0.5), mix(v1, v2, 0.5), 0.5); // midpoint of curve
+		if (!isInFrustum(v0) && !isInFrustum(m) && !isInFrustum(v2)) {
+			continue;
+		}
+	#endif
+
+	#if ENABLE_DISTANCE_CULLING
+		const vec3 c = camera.invView[3].xyz;
+		float d_proj = length(v0 - c - up * dot(v0 - c, up));
+
+		float d_max = DISTANCE_CULLING_DIST_MAX;
+		int n = DISTANCE_CULLING_NUM_BUCKETS;
+
+		if (bladeIdx % n > floor(n * (1 - d_proj / d_max))) {
+			continue;
+		}
+	#endif
+	#endif
+
+	// Don't need to write back to the buffer here as it's all in the same shader, but for better comparison
+
+		const uint culledIdx = atomicAdd(numBlades.vertexCount, 1);
+		culledBlades.blades[culledIdx] = thisBlade;
+
+// // --------- Compute Shader part ends here ---------
+
+
+
+		v1.xyz = v1_corr.xyz;
+		v2.xyz = v2_corr.xyz;
+}
+else
+{
+		// Currently using Compute Shader to update the blade positions and culling
+		if (bladeIdx >= numBlades.vertexCount) {
+			return;
+		}
+
+		Blade thisBlade = culledBlades.blades[bladeIdx];
+
+		//local space
+		v0 = thisBlade.v0.xyz;
+		v1 = thisBlade.v1.xyz;
+		v2 = thisBlade.v2.xyz;
+		up = thisBlade.up.xyz;
+
+		theta = thisBlade.v0.w; // rotation
+		h = thisBlade.v1.w; // height
+		w = thisBlade.v2.w; // width
+		stiffness = thisBlade.up.w; // stiffness
+}
+		
+		//world space (vertex shader)
+		v0 = (model * vec4(v0, 1.0)).xyz;
+		v1 = (model * vec4(v1, 1.0)).xyz;
+		v2 = (model * vec4(v2, 1.0)).xyz;
+		up = (model * vec4(up, 0.0)).xyz;
+
+
+		// calculate the vertices of the blade (Simulate TES)
+		for (int i = 0; i < vertexCount; i++) {
+			vec2 uv = calcUV(i, tesLevel);
+			float u = uv.x;
+			float v = uv.y;
+
+			const vec3 a = mix(v0,v1,v); //when v=1, a=v1
+			const vec3 b = mix(v1,v2,v); //when v=1, b=v2
+			const vec3 c = mix(a,b,v);   //when v=1, c=b=v2
+			const float t = tParabola(u, v); //the shape, [-(1-v^2),1-v^2] for v in [0,1], when v=1, t=0; when v=0, t=[-1,1] for u in [0,1]
+
+			const vec3 t1 = vec3(cos(theta), 0, sin(theta));  // bitangent (blade width)
+
+			const vec3 pos = c + w * t1 * t;
+
+			gl_MeshVerticesEXT[i+vertexCount*j].gl_Position = camera.proj * camera.view * vec4(pos, 1.0);
+
+			vertexOutput[i+vertexCount*j].pos = pos;
+			vertexOutput[i+vertexCount*j].normal = normalize(cross(normalize(b - a), t1));          // normal calculation
+			vertexOutput[i+vertexCount*j].uv = uv;
+		}
+
+		// calculate the indices of the blade (Simulate TES)
+		for(int i = 0; i < tesLevel; i++) {
+			ivec3 indices = ivec3(0, 1, 2) + 3*i;
+			ivec3 indices_2 = ivec3(0, 1, 2) + 3*(i+1);
+			gl_PrimitiveTriangleIndicesEXT[4*i+primCount*j+0] = uvec3(indices.x,indices.y,indices_2.y);
+			gl_PrimitiveTriangleIndicesEXT[4*i+primCount*j+1] = uvec3(indices.x,indices_2.y,indices_2.x);
+			gl_PrimitiveTriangleIndicesEXT[4*i+primCount*j+2] = uvec3(indices.y,indices.z,indices_2.z);
+			gl_PrimitiveTriangleIndicesEXT[4*i+primCount*j+3] = uvec3(indices.y,indices_2.z,indices_2.y);
+		}
+	}
+}

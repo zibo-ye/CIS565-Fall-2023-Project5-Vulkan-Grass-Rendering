@@ -15,6 +15,10 @@ struct ApplicationArgs {
     bool limitFPS = false;
 	int bladeNumExponent = 13; // 2^13 = 8192
 	int bladeNum = 1<<13; // 2^13 = 8192
+	float camera_distance = 20.0f;
+	float camera_theta = 0.0f;
+	float camera_phi = -90.f;
+    bool enableMeshShaderCompute = false;
     //bool headlessIgnoreSaveFrame = false;
 };
 

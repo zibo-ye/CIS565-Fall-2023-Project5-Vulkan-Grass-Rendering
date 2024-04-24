@@ -70,6 +70,7 @@ namespace {
 
     void ParseArguments(const Utility::ArgsParser& argsParser)
 	{
+        argsParser.PrintArgs();
 		auto windowSizeArg = argsParser.GetArg("drawing-size");
 		if (windowSizeArg.has_value()) {
 			args.windowSize.first = std::stoi(windowSizeArg.value()[0]);
@@ -95,6 +96,18 @@ namespace {
 		if (bladeNumArg.has_value()) {
 			args.bladeNumExponent = std::stoi(bladeNumArg.value()[0]);
 			args.bladeNum = 1 << args.bladeNumExponent;
+		}
+
+		auto enableMeshShaderComputeArg = argsParser.GetArg("enableMeshShaderCompute");
+		if (enableMeshShaderComputeArg.has_value()) {
+			args.enableMeshShaderCompute = true;
+		}
+
+        auto cameraArg = argsParser.GetArg("camera_arg");
+        if (cameraArg.has_value()) {
+			args.camera_distance = std::stof(cameraArg.value()[0]);
+			args.camera_theta = std::stof(cameraArg.value()[1]);
+			args.camera_phi = std::stof(cameraArg.value()[2]);
 		}
 	}
 

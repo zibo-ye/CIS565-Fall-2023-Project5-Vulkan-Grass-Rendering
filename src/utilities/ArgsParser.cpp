@@ -12,7 +12,7 @@ std::optional<std::vector<std::string>> ArgsParser::GetArg(const std::string& ar
     return std::nullopt;
 }
 
-void ArgsParser::PrintArgs()
+void ArgsParser::PrintArgs() const
 {
     std::cout << "ArgsParser parsed the following parameters: " << std::endl;
     for (const auto& [key, values] : m_Args) {

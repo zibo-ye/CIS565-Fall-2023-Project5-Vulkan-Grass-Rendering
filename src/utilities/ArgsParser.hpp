@@ -21,7 +21,7 @@ class ArgsParser {
 public:
     ArgsParser(int argc, const char** argv);
 
-    void PrintArgs();
+    void PrintArgs() const;
 
     std::optional<std::vector<std::string>> GetArg(const std::string& argName) const;
 

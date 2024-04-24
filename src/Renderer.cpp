@@ -35,7 +35,11 @@ Renderer::Renderer(Device* device, SwapChain* swapChain, Scene* scene, Camera* c
 	vkCmdDrawMeshTasksEXTFunc = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdDrawMeshTasksEXT"));
 	CreateGrassMeshShaderPipeline();
 	RecordCommandBuffers();
-	RecordComputeCommandBuffer();
+
+	if (args.mode == "tess" || args.mode == "both" || !args.enableMeshShaderCompute)
+	{
+		RecordComputeCommandBuffer();
+	}
 }
 
 void Renderer::CreateCommandPools() {
@@ -181,7 +185,7 @@ void Renderer::CreateTimeDescriptorSetLayout() {
 	uboLayoutBinding.binding = 0;
 	uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 	uboLayoutBinding.descriptorCount = 1;
-	uboLayoutBinding.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT;
+	uboLayoutBinding.stageFlags = VK_SHADER_STAGE_COMPUTE_BIT | VK_SHADER_STAGE_MESH_BIT_EXT;
 	uboLayoutBinding.pImmutableSamplers = nullptr;
 
 	std::vector<VkDescriptorSetLayoutBinding> bindings = { uboLayoutBinding };
@@ -1172,15 +1176,17 @@ void Renderer::RecordCommandBuffers() {
 }
 
 void Renderer::Frame() {
+	if (args.mode == "tess" || args.mode == "both" || !args.enableMeshShaderCompute)
+	{
+		VkSubmitInfo computeSubmitInfo = {};
+		computeSubmitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 
-	VkSubmitInfo computeSubmitInfo = {};
-	computeSubmitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		computeSubmitInfo.commandBufferCount = 1;
+		computeSubmitInfo.pCommandBuffers = &computeCommandBuffer;
 
-	computeSubmitInfo.commandBufferCount = 1;
-	computeSubmitInfo.pCommandBuffers = &computeCommandBuffer;
-
-	if (vkQueueSubmit(device->GetQueue(QueueFlags::Compute), 1, &computeSubmitInfo, VK_NULL_HANDLE) != VK_SUCCESS) {
-		throw std::runtime_error("Failed to submit draw command buffer");
+		if (vkQueueSubmit(device->GetQueue(QueueFlags::Compute), 1, &computeSubmitInfo, VK_NULL_HANDLE) != VK_SUCCESS) {
+			throw std::runtime_error("Failed to submit draw command buffer");
+		}
 	}
 
 	if (!swapChain->Acquire()) {
@@ -1217,7 +1223,16 @@ void Renderer::Frame() {
 void Renderer::CreateGrassMeshShaderPipeline()
 {
 	// --- Set up programmable shaders ---
-	VkShaderModule meshShaderModule = ShaderModule::Create("shaders/meshshader.mesh.spv", logicalDevice);
+	VkShaderModule meshShaderModule;
+	if (!args.enableMeshShaderCompute)
+	{
+		meshShaderModule = ShaderModule::Create("shaders/meshshader.mesh.spv", logicalDevice);
+	}
+	else
+	{
+		meshShaderModule = ShaderModule::Create("shaders/meshshader_withcompute.mesh.spv", logicalDevice);
+	}
+
 	//VkShaderModule taskShaderModule = ShaderModule::Create("shaders/meshshader.task.spv", logicalDevice);
 	VkShaderModule fragShaderModule = ShaderModule::Create("shaders/grass.frag.spv", logicalDevice);
 

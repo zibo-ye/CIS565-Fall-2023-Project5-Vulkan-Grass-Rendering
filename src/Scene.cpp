@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "BufferUtils.h"
+#include "GlobalDef.h"
 
 Scene::Scene(Device* device) : device(device) {
     BufferUtils::CreateBuffer(device, sizeof(Time), VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, timeBuffer, timeBufferMemory);
@@ -30,7 +31,7 @@ void Scene::UpdateTime() {
 
     time.deltaTime = nextDeltaTime.count();
     time.totalTime += time.deltaTime;
-
+    time.enableMeshShaderCompute = args.enableMeshShaderCompute;
     memcpy(mappedData, &time, sizeof(Time));
 }
 
