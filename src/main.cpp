@@ -7,6 +7,7 @@
 #include "Image.h"
 #include "utilities/ArgsParser.hpp"
 #include "GlobalDef.h"
+#include <iomanip>
 
 Device* device;
 SwapChain* swapChain;
@@ -145,6 +146,14 @@ namespace {
 
 			frameTimes.clear(); // Reset for next batch
 			deltaOutputTime = 0.0f;
+
+			std::stringstream ss;
+			//set precision to 2 decimal places
+			ss << std::fixed << std::setprecision(2);
+            float averageFrameTimeInMs = averageFrameTime / 1000.0f;
+			ss << "Vulkan Grass Rendering\tMode: " << *args.mode << "\tGrassCount: " << args.bladeNum << "\tFPS: " << fps << "\tAvg Frame Time: " << averageFrameTimeInMs << "ms";
+
+			glfwSetWindowTitle(GetGLFWWindow(), ss.str().c_str());
 		}
 		lastFrameTime = std::chrono::high_resolution_clock::now(); // To eliminate the time taken to print statistics from the next batch
 	}
