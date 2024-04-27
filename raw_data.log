@@ -1,0 +1,475 @@
+
+2024-04-26 22:20:54 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 10
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:10 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 2026.59, Avg Frame Time: 493.439us , P99: 980.5us , P95: 640.6us , P90: 590.7us , Std Dev: 1573.45
+FPS: 2381.62, Avg Frame Time: 419.883us , P99: 665.1us , P95: 552us , P90: 473.7us , Std Dev: 62.4363
+FPS: 2383.53, Avg Frame Time: 419.547us , P99: 670.8us , P95: 541.6us , P90: 473.1us , Std Dev: 60.824
+FPS: 2382.37, Avg Frame Time: 419.751us , P99: 678.2us , P95: 551.1us , P90: 471.6us , Std Dev: 63.9137
+FPS: 2389.26, Avg Frame Time: 418.54us , P99: 678.8us , P95: 556.3us , P90: 488.6us , Std Dev: 72.5938
+FPS: 2386.57, Avg Frame Time: 419.011us , P99: 681.1us , P95: 547.5us , P90: 478.7us , Std Dev: 66.1318
+FPS: 2385.15, Avg Frame Time: 419.262us , P99: 679.9us , P95: 539.8us , P90: 473.4us , Std Dev: 62.634
+FPS: 2382.08, Avg Frame Time: 419.801us , P99: 663.4us , P95: 549.3us , P90: 470.9us , Std Dev: 64.2112
+FPS: 2386.43, Avg Frame Time: 419.035us , P99: 688.2us , P95: 547.9us , P90: 481.2us , Std Dev: 75.1677
+FPS: 2387.23, Avg Frame Time: 418.896us , P99: 682.6us , P95: 547.9us , P90: 479.9us , Std Dev: 65.8319
+FPS: 2381.72, Avg Frame Time: 419.865us , P99: 681.1us , P95: 555.1us , P90: 482.4us , Std Dev: 65.5695
+FPS: 2390.85, Avg Frame Time: 418.261us , P99: 680.8us , P95: 546.2us , P90: 472.8us , Std Dev: 63.7964
+FPS: 2395.42, Avg Frame Time: 417.463us , P99: 656.8us , P95: 554.2us , P90: 475.5us , Std Dev: 63.4627
+FPS: 2382.49, Avg Frame Time: 419.728us , P99: 695us , P95: 544.6us , P90: 474.6us , Std Dev: 65.0783
+FPS: 2379.66, Avg Frame Time: 420.228us , P99: 695.5us , P95: 559.8us , P90: 478.9us , Std Dev: 71.2025
+FPS: 2386.63, Avg Frame Time: 419.001us , P99: 678.1us , P95: 546.3us , P90: 467.7us , Std Dev: 64.8212
+FPS: 2384.96, Avg Frame Time: 419.293us , P99: 688.9us , P95: 548.5us , P90: 472.3us , Std Dev: 68.7348
+FPS: 2388.59, Avg Frame Time: 418.657us , P99: 668.9us , P95: 546.8us , P90: 468.9us , Std Dev: 64.0451
+FPS: 2391.11, Avg Frame Time: 418.216us , P99: 677.8us , P95: 557.4us , P90: 473.9us , Std Dev: 66.4715
+
+2024-04-26 22:21:14 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 10
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:10 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 2169.62, Avg Frame Time: 460.911us , P99: 854.6us , P95: 570.6us , P90: 488.4us , Std Dev: 1498.13
+FPS: 2377.97, Avg Frame Time: 420.527us , P99: 663us , P95: 549.3us , P90: 475.3us , Std Dev: 64.7815
+FPS: 2373.67, Avg Frame Time: 421.288us , P99: 686.2us , P95: 539.9us , P90: 474.3us , Std Dev: 62.4914
+FPS: 2381.79, Avg Frame Time: 419.851us , P99: 666.2us , P95: 542.1us , P90: 472.3us , Std Dev: 64.7944
+FPS: 2358.72, Avg Frame Time: 423.959us , P99: 694.2us , P95: 547.2us , P90: 478.5us , Std Dev: 196.195
+FPS: 2377.81, Avg Frame Time: 420.555us , P99: 672.9us , P95: 558.7us , P90: 482us , Std Dev: 63.3107
+FPS: 2368.7, Avg Frame Time: 422.172us , P99: 687.9us , P95: 547.4us , P90: 484.8us , Std Dev: 66.5404
+FPS: 2370.68, Avg Frame Time: 421.82us , P99: 674.3us , P95: 547.4us , P90: 490.8us , Std Dev: 68.369
+FPS: 2377.73, Avg Frame Time: 420.569us , P99: 695.9us , P95: 542.8us , P90: 474us , Std Dev: 65.1756
+FPS: 2378.75, Avg Frame Time: 420.389us , P99: 667.7us , P95: 550.7us , P90: 474.8us , Std Dev: 64.4963
+FPS: 2373.82, Avg Frame Time: 421.261us , P99: 697.6us , P95: 559.3us , P90: 481.3us , Std Dev: 80.3557
+FPS: 2372.4, Avg Frame Time: 421.514us , P99: 689.8us , P95: 557.9us , P90: 488.8us , Std Dev: 70.9929
+FPS: 2377.21, Avg Frame Time: 420.662us , P99: 678.1us , P95: 547.3us , P90: 475.8us , Std Dev: 68.7533
+FPS: 2371.2, Avg Frame Time: 421.727us , P99: 680.5us , P95: 563.4us , P90: 474.8us , Std Dev: 73.6176
+FPS: 2372.87, Avg Frame Time: 421.431us , P99: 683.3us , P95: 558.9us , P90: 482.7us , Std Dev: 66.6204
+FPS: 2381.65, Avg Frame Time: 419.877us , P99: 671.5us , P95: 544.6us , P90: 470.8us , Std Dev: 64.7466
+FPS: 2374.42, Avg Frame Time: 421.156us , P99: 684.3us , P95: 552.5us , P90: 473.4us , Std Dev: 64.9561
+FPS: 2373.91, Avg Frame Time: 421.246us , P99: 678.7us , P95: 549.1us , P90: 478.9us , Std Dev: 64.8614
+FPS: 2380.27, Avg Frame Time: 420.12us , P99: 705.6us , P95: 551.6us , P90: 473us , Std Dev: 67.9653
+
+2024-04-26 22:21:34 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 10 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:10 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 2264.78, Avg Frame Time: 441.544us , P99: 846.4us , P95: 560.7us , P90: 472.5us , Std Dev: 1415.71
+FPS: 2453.65, Avg Frame Time: 407.557us , P99: 677.3us , P95: 532.1us , P90: 466.1us , Std Dev: 66.1229
+FPS: 2457.54, Avg Frame Time: 406.912us , P99: 680us , P95: 532.2us , P90: 458.3us , Std Dev: 70.883
+FPS: 2459.66, Avg Frame Time: 406.56us , P99: 642us , P95: 530.8us , P90: 459.6us , Std Dev: 61.5914
+FPS: 2461.76, Avg Frame Time: 406.213us , P99: 653.5us , P95: 531.9us , P90: 461.4us , Std Dev: 64.6864
+FPS: 2470.77, Avg Frame Time: 404.732us , P99: 675.4us , P95: 534us , P90: 464.6us , Std Dev: 68.2794
+FPS: 2467.55, Avg Frame Time: 405.261us , P99: 659.6us , P95: 525.4us , P90: 454.6us , Std Dev: 62.8731
+FPS: 2460.44, Avg Frame Time: 406.431us , P99: 674.4us , P95: 540us , P90: 459.7us , Std Dev: 65.4757
+FPS: 2458.98, Avg Frame Time: 406.673us , P99: 646.5us , P95: 531.7us , P90: 459.5us , Std Dev: 74.2022
+FPS: 2456.5, Avg Frame Time: 407.083us , P99: 681.6us , P95: 539.1us , P90: 463us , Std Dev: 69.6886
+FPS: 2459.46, Avg Frame Time: 406.594us , P99: 644.8us , P95: 528.4us , P90: 456.4us , Std Dev: 61.1636
+FPS: 2461.67, Avg Frame Time: 406.228us , P99: 664.8us , P95: 532.1us , P90: 460.8us , Std Dev: 64.2693
+FPS: 2456.99, Avg Frame Time: 407.003us , P99: 657us , P95: 530.4us , P90: 454.1us , Std Dev: 65.7549
+FPS: 2454.26, Avg Frame Time: 407.454us , P99: 687us , P95: 532.8us , P90: 452.2us , Std Dev: 64.165
+FPS: 2447.97, Avg Frame Time: 408.502us , P99: 668.3us , P95: 536.1us , P90: 463.3us , Std Dev: 65.4613
+FPS: 2431.57, Avg Frame Time: 411.257us , P99: 673.9us , P95: 537.2us , P90: 465.4us , Std Dev: 233.619
+FPS: 2453.18, Avg Frame Time: 407.635us , P99: 686.6us , P95: 537.2us , P90: 461.1us , Std Dev: 65.625
+FPS: 2476.51, Avg Frame Time: 403.794us , P99: 650.6us , P95: 525.8us , P90: 457us , Std Dev: 66.3127
+FPS: 2465.53, Avg Frame Time: 405.592us , P99: 692.7us , P95: 529.2us , P90: 458.5us , Std Dev: 74.1475
+
+2024-04-26 22:21:54 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 12
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:12 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 1684.58, Avg Frame Time: 593.62us , P99: 998.7us , P95: 737.1us , P90: 641.1us , Std Dev: 1660.34
+FPS: 1832.22, Avg Frame Time: 545.785us , P99: 825.6us , P95: 680.5us , P90: 617.2us , Std Dev: 69.1972
+FPS: 1829.53, Avg Frame Time: 546.587us , P99: 820.7us , P95: 688.3us , P90: 619.6us , Std Dev: 79.0456
+FPS: 1831.63, Avg Frame Time: 545.962us , P99: 820.1us , P95: 692.9us , P90: 624.8us , Std Dev: 70.7265
+FPS: 1833.2, Avg Frame Time: 545.495us , P99: 836.7us , P95: 689.7us , P90: 624.7us , Std Dev: 73.9405
+FPS: 1826.2, Avg Frame Time: 547.584us , P99: 869.8us , P95: 693us , P90: 628.8us , Std Dev: 76.3424
+FPS: 1829.9, Avg Frame Time: 546.477us , P99: 820.8us , P95: 693.6us , P90: 631.2us , Std Dev: 72.9865
+FPS: 1822.53, Avg Frame Time: 548.688us , P99: 811.7us , P95: 697.9us , P90: 633.7us , Std Dev: 69.6378
+FPS: 1825.42, Avg Frame Time: 547.82us , P99: 840.1us , P95: 693.6us , P90: 623.4us , Std Dev: 73.854
+FPS: 1830.39, Avg Frame Time: 546.331us , P99: 851.1us , P95: 684.6us , P90: 623.2us , Std Dev: 76.7865
+FPS: 1825.22, Avg Frame Time: 547.88us , P99: 875.2us , P95: 705.2us , P90: 627.9us , Std Dev: 81.005
+FPS: 1823.84, Avg Frame Time: 548.294us , P99: 811.2us , P95: 687.4us , P90: 621.4us , Std Dev: 71.312
+FPS: 1823.78, Avg Frame Time: 548.312us , P99: 806.7us , P95: 684.9us , P90: 632.3us , Std Dev: 69.6848
+FPS: 1828.9, Avg Frame Time: 546.776us , P99: 809.2us , P95: 693.5us , P90: 632.6us , Std Dev: 70.7277
+FPS: 1823.63, Avg Frame Time: 548.357us , P99: 827.2us , P95: 687.2us , P90: 632.2us , Std Dev: 82.6931
+FPS: 1830.41, Avg Frame Time: 546.324us , P99: 825.3us , P95: 678.9us , P90: 620.1us , Std Dev: 69.4494
+FPS: 1831.94, Avg Frame Time: 545.869us , P99: 811.9us , P95: 692.3us , P90: 616.4us , Std Dev: 69.1982
+FPS: 1830.93, Avg Frame Time: 546.171us , P99: 813us , P95: 674.4us , P90: 624.4us , Std Dev: 72.501
+FPS: 1834.76, Avg Frame Time: 545.03us , P99: 807.1us , P95: 680.7us , P90: 624.7us , Std Dev: 68.9429
+
+2024-04-26 22:22:14 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 12
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:12 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 1758.67, Avg Frame Time: 568.61us , P99: 975us , P95: 693.7us , P90: 606.5us , Std Dev: 1632.05
+FPS: 1919.28, Avg Frame Time: 521.029us , P99: 775us , P95: 645.7us , P90: 588.1us , Std Dev: 64.6214
+FPS: 1916.15, Avg Frame Time: 521.879us , P99: 787.6us , P95: 645us , P90: 590.6us , Std Dev: 66.7062
+FPS: 1911.48, Avg Frame Time: 523.155us , P99: 790us , P95: 654us , P90: 598.4us , Std Dev: 72.4156
+FPS: 1888.06, Avg Frame Time: 529.644us , P99: 839.4us , P95: 674.3us , P90: 613.8us , Std Dev: 88.3881
+FPS: 1918.12, Avg Frame Time: 521.343us , P99: 808.6us , P95: 649.7us , P90: 599.8us , Std Dev: 69.995
+FPS: 1909.71, Avg Frame Time: 523.639us , P99: 814.2us , P95: 664.7us , P90: 602.5us , Std Dev: 71.26
+FPS: 1909.44, Avg Frame Time: 523.713us , P99: 789.8us , P95: 659.1us , P90: 596.1us , Std Dev: 122.3
+FPS: 1913.74, Avg Frame Time: 522.536us , P99: 781.2us , P95: 660us , P90: 595.8us , Std Dev: 67.958
+FPS: 1912.81, Avg Frame Time: 522.792us , P99: 778.6us , P95: 652.2us , P90: 595.3us , Std Dev: 68.8398
+FPS: 1914.79, Avg Frame Time: 522.25us , P99: 794.9us , P95: 651.6us , P90: 602.2us , Std Dev: 74.1869
+FPS: 1915.25, Avg Frame Time: 522.125us , P99: 784.1us , P95: 645.9us , P90: 588.8us , Std Dev: 66.923
+FPS: 1911.59, Avg Frame Time: 523.124us , P99: 777.2us , P95: 657.8us , P90: 601.6us , Std Dev: 67.1737
+FPS: 1909.7, Avg Frame Time: 523.642us , P99: 763us , P95: 659.1us , P90: 591.2us , Std Dev: 64.5893
+FPS: 1911.34, Avg Frame Time: 523.192us , P99: 771.4us , P95: 647.4us , P90: 595us , Std Dev: 67.185
+FPS: 1913.61, Avg Frame Time: 522.573us , P99: 785.9us , P95: 651.9us , P90: 591.4us , Std Dev: 65.2766
+FPS: 1919.94, Avg Frame Time: 520.849us , P99: 795.4us , P95: 653.2us , P90: 599.7us , Std Dev: 68.6053
+FPS: 1913.67, Avg Frame Time: 522.557us , P99: 790.5us , P95: 649.6us , P90: 594us , Std Dev: 67.9477
+FPS: 1917.66, Avg Frame Time: 521.468us , P99: 774.4us , P95: 652.2us , P90: 592.8us , Std Dev: 67.5033
+
+2024-04-26 22:22:34 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 12 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:12 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 1986.89, Avg Frame Time: 503.299us , P99: 774.4us , P95: 611.7us , P90: 538.1us , Std Dev: 1564.59
+FPS: 2164.9, Avg Frame Time: 461.916us , P99: 718.5us , P95: 585.6us , P90: 525.5us , Std Dev: 69.4716
+FPS: 2166.5, Avg Frame Time: 461.573us , P99: 701.2us , P95: 583.3us , P90: 528.2us , Std Dev: 61.2378
+FPS: 2164.99, Avg Frame Time: 461.895us , P99: 680.2us , P95: 582.1us , P90: 527.3us , Std Dev: 63.0027
+FPS: 2159.84, Avg Frame Time: 462.998us , P99: 720.1us , P95: 594.6us , P90: 536.4us , Std Dev: 77.0731
+FPS: 2161.94, Avg Frame Time: 462.547us , P99: 708.1us , P95: 584.6us , P90: 530.4us , Std Dev: 63.9075
+FPS: 2169.04, Avg Frame Time: 461.033us , P99: 714.7us , P95: 585us , P90: 525.7us , Std Dev: 65.7555
+FPS: 2158.54, Avg Frame Time: 463.276us , P99: 685us , P95: 587.1us , P90: 520.8us , Std Dev: 59.5787
+FPS: 2164.6, Avg Frame Time: 461.98us , P99: 697.7us , P95: 578.3us , P90: 524.6us , Std Dev: 59.1763
+FPS: 2160.33, Avg Frame Time: 462.892us , P99: 716.2us , P95: 582.4us , P90: 526.9us , Std Dev: 63.1197
+FPS: 2161.99, Avg Frame Time: 462.538us , P99: 699.7us , P95: 589.1us , P90: 531.6us , Std Dev: 62.5914
+FPS: 2163.32, Avg Frame Time: 462.253us , P99: 687.7us , P95: 583us , P90: 526.9us , Std Dev: 60.0089
+FPS: 2157.71, Avg Frame Time: 463.454us , P99: 687.2us , P95: 589.8us , P90: 535.5us , Std Dev: 64.3195
+FPS: 2154.61, Avg Frame Time: 464.122us , P99: 694.5us , P95: 582.6us , P90: 523.7us , Std Dev: 60.8642
+FPS: 2158.93, Avg Frame Time: 463.192us , P99: 735.2us , P95: 583.4us , P90: 531.1us , Std Dev: 65.1827
+FPS: 2165.56, Avg Frame Time: 461.774us , P99: 710.8us , P95: 579.9us , P90: 520.1us , Std Dev: 61.2127
+FPS: 2160.79, Avg Frame Time: 462.795us , P99: 714us , P95: 577.2us , P90: 527.7us , Std Dev: 62.3724
+FPS: 2166.51, Avg Frame Time: 461.573us , P99: 697.9us , P95: 576.1us , P90: 519.9us , Std Dev: 60.574
+FPS: 2140.43, Avg Frame Time: 467.195us , P99: 682us , P95: 588.9us , P90: 532.8us , Std Dev: 256.743
+
+2024-04-26 22:22:54 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 14
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:14 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 950.533, Avg Frame Time: 1052.04us , P99: 1439.1us , P95: 1251.2us , P90: 1073.1us , Std Dev: 2752.34
+FPS: 1057.34, Avg Frame Time: 945.769us , P99: 1315us , P95: 1095.7us , P90: 1036.8us , Std Dev: 93.5231
+FPS: 1058.35, Avg Frame Time: 944.866us , P99: 1243.6us , P95: 1096.5us , P90: 1045.5us , Std Dev: 84.3726
+FPS: 1061.71, Avg Frame Time: 941.877us , P99: 1269us , P95: 1082.4us , P90: 1034.3us , Std Dev: 81.7404
+FPS: 1062.33, Avg Frame Time: 941.324us , P99: 1272.8us , P95: 1097.6us , P90: 1038.8us , Std Dev: 86.8608
+FPS: 1062.2, Avg Frame Time: 941.439us , P99: 1271.7us , P95: 1110.3us , P90: 1040.5us , Std Dev: 87.4707
+FPS: 1065.87, Avg Frame Time: 938.202us , P99: 1191.3us , P95: 1073.9us , P90: 1034.8us , Std Dev: 76.0506
+FPS: 1063.99, Avg Frame Time: 939.861us , P99: 1206.3us , P95: 1083us , P90: 1033.4us , Std Dev: 77.1967
+FPS: 1062.69, Avg Frame Time: 941.007us , P99: 1227.6us , P95: 1082.1us , P90: 1039.1us , Std Dev: 79.4708
+FPS: 1062.56, Avg Frame Time: 941.12us , P99: 1253.3us , P95: 1090.2us , P90: 1040.2us , Std Dev: 85.3204
+FPS: 1058.47, Avg Frame Time: 944.758us , P99: 1240.8us , P95: 1092.2us , P90: 1051.4us , Std Dev: 86.4526
+FPS: 1057.98, Avg Frame Time: 945.195us , P99: 1246us , P95: 1090.5us , P90: 1045.4us , Std Dev: 83.8946
+FPS: 1055.92, Avg Frame Time: 947.045us , P99: 1242.8us , P95: 1098.9us , P90: 1041.7us , Std Dev: 84.2416
+FPS: 1056.47, Avg Frame Time: 946.546us , P99: 1218.5us , P95: 1108.4us , P90: 1051.4us , Std Dev: 81.8941
+FPS: 1057.93, Avg Frame Time: 945.245us , P99: 1239us , P95: 1093.6us , P90: 1050.8us , Std Dev: 82.053
+FPS: 1060.59, Avg Frame Time: 942.868us , P99: 1248.9us , P95: 1095.6us , P90: 1047.1us , Std Dev: 88.8193
+FPS: 1062.6, Avg Frame Time: 941.089us , P99: 1234.6us , P95: 1093.7us , P90: 1038.2us , Std Dev: 80.8278
+FPS: 1066.01, Avg Frame Time: 938.081us , P99: 1232.9us , P95: 1083.5us , P90: 1032.8us , Std Dev: 78.6432
+FPS: 1066.32, Avg Frame Time: 937.808us , P99: 1271.1us , P95: 1081.6us , P90: 1037.9us , Std Dev: 85.3892
+
+2024-04-26 22:23:14 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 14
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:14 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 1103.38, Avg Frame Time: 906.307us , P99: 1375.6us , P95: 1118.5us , P90: 939.8us , Std Dev: 2078.34
+FPS: 1196.96, Avg Frame Time: 835.449us , P99: 1138.6us , P95: 986us , P90: 931.3us , Std Dev: 81.8843
+FPS: 1196.22, Avg Frame Time: 835.967us , P99: 1125.4us , P95: 988.2us , P90: 921.7us , Std Dev: 82.6272
+FPS: 1199.25, Avg Frame Time: 833.854us , P99: 1148.4us , P95: 1003us , P90: 931.4us , Std Dev: 84.4401
+FPS: 1203.02, Avg Frame Time: 831.239us , P99: 1138.5us , P95: 998us , P90: 929.8us , Std Dev: 86.703
+FPS: 1199.13, Avg Frame Time: 833.941us , P99: 1142us , P95: 990.9us , P90: 933.4us , Std Dev: 81.7031
+FPS: 1196.52, Avg Frame Time: 835.759us , P99: 1146.5us , P95: 1012.4us , P90: 928.7us , Std Dev: 84.6785
+FPS: 1197.38, Avg Frame Time: 835.157us , P99: 1113.4us , P95: 985.5us , P90: 929.8us , Std Dev: 89.7517
+FPS: 1197.23, Avg Frame Time: 835.261us , P99: 1143.4us , P95: 978.9us , P90: 922.4us , Std Dev: 77.9828
+FPS: 1191.91, Avg Frame Time: 838.992us , P99: 1150.3us , P95: 991.4us , P90: 920.2us , Std Dev: 235.353
+FPS: 1194.64, Avg Frame Time: 837.074us , P99: 1118.4us , P95: 987.7us , P90: 927.2us , Std Dev: 81.0999
+FPS: 1197.05, Avg Frame Time: 835.387us , P99: 1122.9us , P95: 984.9us , P90: 917.6us , Std Dev: 80.7279
+FPS: 1196.79, Avg Frame Time: 835.57us , P99: 1134.6us , P95: 990.3us , P90: 927.1us , Std Dev: 88.4543
+FPS: 1195.69, Avg Frame Time: 836.339us , P99: 1150.8us , P95: 980.9us , P90: 928.7us , Std Dev: 79.1011
+FPS: 1196.85, Avg Frame Time: 835.523us , P99: 1110.8us , P95: 993.5us , P90: 926.3us , Std Dev: 82.1423
+FPS: 1198.26, Avg Frame Time: 834.541us , P99: 1121.1us , P95: 988.2us , P90: 921.3us , Std Dev: 82.5028
+FPS: 1198.77, Avg Frame Time: 834.186us , P99: 1112us , P95: 975.2us , P90: 917.4us , Std Dev: 77.7941
+FPS: 1198.82, Avg Frame Time: 834.155us , P99: 1129.2us , P95: 987.5us , P90: 930.1us , Std Dev: 79.5259
+FPS: 1199.49, Avg Frame Time: 833.687us , P99: 1120.8us , P95: 986.4us , P90: 930.1us , Std Dev: 80.0569
+
+2024-04-26 22:23:34 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 14 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:14 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 1500.84, Avg Frame Time: 666.294us , P99: 1048.7us , P95: 813.5us , P90: 708.7us , Std Dev: 1822.5
+FPS: 1645.47, Avg Frame Time: 607.73us , P99: 882.7us , P95: 759.6us , P90: 694.7us , Std Dev: 73.2061
+FPS: 1646.63, Avg Frame Time: 607.303us , P99: 866.7us , P95: 746.5us , P90: 685.8us , Std Dev: 69.3857
+FPS: 1649.76, Avg Frame Time: 606.15us , P99: 872us , P95: 732.5us , P90: 683.9us , Std Dev: 68.7698
+FPS: 1648.93, Avg Frame Time: 606.453us , P99: 886.3us , P95: 743.5us , P90: 676.3us , Std Dev: 74.6875
+FPS: 1649.58, Avg Frame Time: 606.215us , P99: 903.5us , P95: 743.7us , P90: 685.6us , Std Dev: 76.0853
+FPS: 1652.31, Avg Frame Time: 605.215us , P99: 880.8us , P95: 744.1us , P90: 684.2us , Std Dev: 71.77
+FPS: 1651.23, Avg Frame Time: 605.609us , P99: 865.7us , P95: 735.7us , P90: 686.8us , Std Dev: 69.706
+FPS: 1647.15, Avg Frame Time: 607.108us , P99: 879.5us , P95: 739.4us , P90: 682.2us , Std Dev: 71.2508
+FPS: 1648.04, Avg Frame Time: 606.783us , P99: 848us , P95: 737us , P90: 678.2us , Std Dev: 67.8512
+FPS: 1643.55, Avg Frame Time: 608.439us , P99: 883.4us , P95: 746us , P90: 687.3us , Std Dev: 70.1683
+FPS: 1645.41, Avg Frame Time: 607.75us , P99: 893.1us , P95: 742.7us , P90: 682.1us , Std Dev: 72.0174
+FPS: 1648.91, Avg Frame Time: 606.46us , P99: 876.7us , P95: 753us , P90: 683.1us , Std Dev: 75.4384
+FPS: 1646.3, Avg Frame Time: 607.422us , P99: 865us , P95: 741us , P90: 689.4us , Std Dev: 69.5124
+FPS: 1646.49, Avg Frame Time: 607.353us , P99: 867.3us , P95: 746.4us , P90: 688.4us , Std Dev: 68.7101
+FPS: 1645.13, Avg Frame Time: 607.855us , P99: 869.1us , P95: 751.1us , P90: 686.2us , Std Dev: 70.158
+FPS: 1643.78, Avg Frame Time: 608.355us , P99: 877us , P95: 743us , P90: 686.5us , Std Dev: 70.8854
+FPS: 1654.73, Avg Frame Time: 604.33us , P99: 850.2us , P95: 737.8us , P90: 689.5us , Std Dev: 72.1796
+FPS: 1650.64, Avg Frame Time: 605.827us , P99: 844.9us , P95: 739.4us , P90: 675.5us , Std Dev: 76.2042
+
+2024-04-26 22:23:54 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 16
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:16 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 371.455, Avg Frame Time: 2692.12us , P99: 3034.3us , P95: 2801.6us , P90: 2762.9us , Std Dev: 3684.74
+FPS: 401.916, Avg Frame Time: 2488.08us , P99: 2863.7us , P95: 2663.1us , P90: 2625.6us , Std Dev: 132.725
+FPS: 402.614, Avg Frame Time: 2483.77us , P99: 2783.8us , P95: 2665.7us , P90: 2622.5us , Std Dev: 103.865
+FPS: 404.027, Avg Frame Time: 2475.08us , P99: 2833.5us , P95: 2659us , P90: 2613.7us , Std Dev: 106.44
+FPS: 405.329, Avg Frame Time: 2467.13us , P99: 2773.7us , P95: 2672.1us , P90: 2623.3us , Std Dev: 117.739
+FPS: 405.973, Avg Frame Time: 2463.22us , P99: 2817us , P95: 2709.8us , P90: 2614.3us , Std Dev: 126.533
+FPS: 405.915, Avg Frame Time: 2463.57us , P99: 2858.8us , P95: 2698.1us , P90: 2611.3us , Std Dev: 125.71
+FPS: 406.302, Avg Frame Time: 2461.22us , P99: 2836.6us , P95: 2662.8us , P90: 2594.4us , Std Dev: 116.032
+FPS: 405.089, Avg Frame Time: 2468.59us , P99: 2794.3us , P95: 2654.2us , P90: 2608.9us , Std Dev: 108.922
+FPS: 403.327, Avg Frame Time: 2479.38us , P99: 2841.5us , P95: 2690.6us , P90: 2626.6us , Std Dev: 120.823
+FPS: 403.214, Avg Frame Time: 2480.07us , P99: 2812us , P95: 2658.9us , P90: 2621.5us , Std Dev: 110.203
+FPS: 402.275, Avg Frame Time: 2485.86us , P99: 2846.9us , P95: 2683.1us , P90: 2635.2us , Std Dev: 110.933
+FPS: 401.89, Avg Frame Time: 2488.25us , P99: 2830.1us , P95: 2676us , P90: 2611.6us , Std Dev: 100.826
+FPS: 401.786, Avg Frame Time: 2488.89us , P99: 2795.4us , P95: 2683.3us , P90: 2619.2us , Std Dev: 109.83
+FPS: 402.026, Avg Frame Time: 2487.4us , P99: 2776.9us , P95: 2668.2us , P90: 2628.6us , Std Dev: 98.5549
+FPS: 403.503, Avg Frame Time: 2478.3us , P99: 2813.4us , P95: 2676.4us , P90: 2618.6us , Std Dev: 109.399
+FPS: 404.092, Avg Frame Time: 2474.68us , P99: 2754.1us , P95: 2665.2us , P90: 2601.8us , Std Dev: 98.158
+FPS: 405.988, Avg Frame Time: 2463.13us , P99: 2792.8us , P95: 2672.1us , P90: 2606.9us , Std Dev: 117.048
+FPS: 407.813, Avg Frame Time: 2452.1us , P99: 2777.3us , P95: 2646.5us , P90: 2596.8us , Std Dev: 118.241
+
+2024-04-26 22:24:14 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 16
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:16 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 434.911, Avg Frame Time: 2299.32us , P99: 2699.2us , P95: 2431.3us , P90: 2367.3us , Std Dev: 3328.28
+FPS: 468.159, Avg Frame Time: 2136.03us , P99: 2431us , P95: 2334.2us , P90: 2284.4us , Std Dev: 108.162
+FPS: 469.193, Avg Frame Time: 2131.32us , P99: 2449.2us , P95: 2317.9us , P90: 2277.7us , Std Dev: 108.366
+FPS: 469.59, Avg Frame Time: 2129.52us , P99: 2460.7us , P95: 2303.1us , P90: 2264.3us , Std Dev: 100.741
+FPS: 469.385, Avg Frame Time: 2130.45us , P99: 2504.5us , P95: 2331.6us , P90: 2284.8us , Std Dev: 118.767
+FPS: 469.757, Avg Frame Time: 2128.76us , P99: 2447.6us , P95: 2328.8us , P90: 2268.4us , Std Dev: 109.421
+FPS: 468.733, Avg Frame Time: 2133.41us , P99: 2560.8us , P95: 2321.5us , P90: 2275.6us , Std Dev: 114.744
+FPS: 469.271, Avg Frame Time: 2130.97us , P99: 2430.3us , P95: 2339.7us , P90: 2261us , Std Dev: 107.904
+FPS: 469.465, Avg Frame Time: 2130.08us , P99: 2413.2us , P95: 2322.3us , P90: 2277.2us , Std Dev: 103.942
+FPS: 468.869, Avg Frame Time: 2132.79us , P99: 2484.1us , P95: 2335.6us , P90: 2274.8us , Std Dev: 114.659
+FPS: 469.369, Avg Frame Time: 2130.52us , P99: 2468.9us , P95: 2343.8us , P90: 2276us , Std Dev: 122.484
+FPS: 469.243, Avg Frame Time: 2131.09us , P99: 2405.1us , P95: 2330.8us , P90: 2275.2us , Std Dev: 106.046
+FPS: 466.019, Avg Frame Time: 2145.83us , P99: 2497.3us , P95: 2332.2us , P90: 2247.6us , Std Dev: 631.723
+FPS: 469.315, Avg Frame Time: 2130.77us , P99: 2415.3us , P95: 2316.5us , P90: 2275.6us , Std Dev: 102.15
+FPS: 468.867, Avg Frame Time: 2132.8us , P99: 2465.5us , P95: 2335.7us , P90: 2276.5us , Std Dev: 116.882
+FPS: 469.293, Avg Frame Time: 2130.87us , P99: 2450.3us , P95: 2334.9us , P90: 2271.2us , Std Dev: 105.625
+FPS: 469.612, Avg Frame Time: 2129.42us , P99: 2405.9us , P95: 2314.5us , P90: 2260.5us , Std Dev: 101.934
+FPS: 469.819, Avg Frame Time: 2128.48us , P99: 2463us , P95: 2308.6us , P90: 2259.5us , Std Dev: 107.176
+FPS: 469.491, Avg Frame Time: 2129.97us , P99: 2552.4us , P95: 2340.8us , P90: 2285.7us , Std Dev: 118.285
+
+2024-04-26 22:24:35 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 16 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:16 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 744.182, Avg Frame Time: 1343.76us , P99: 1642.3us , P95: 1460.1us , P90: 1374.9us , Std Dev: 2723.65
+FPS: 806.47, Avg Frame Time: 1239.97us , P99: 1521.7us , P95: 1395.1us , P90: 1345.1us , Std Dev: 88.6522
+FPS: 807.109, Avg Frame Time: 1238.99us , P99: 1513.8us , P95: 1411us , P90: 1354.9us , Std Dev: 89.7283
+FPS: 807.911, Avg Frame Time: 1237.76us , P99: 1522.2us , P95: 1391.5us , P90: 1346.1us , Std Dev: 85.1096
+FPS: 807.672, Avg Frame Time: 1238.13us , P99: 1520.6us , P95: 1403us , P90: 1343.9us , Std Dev: 92.1484
+FPS: 806.593, Avg Frame Time: 1239.78us , P99: 1563.6us , P95: 1400.9us , P90: 1354.6us , Std Dev: 97.8887
+FPS: 806.802, Avg Frame Time: 1239.46us , P99: 1563.2us , P95: 1402.3us , P90: 1350us , Std Dev: 97.9996
+FPS: 807.762, Avg Frame Time: 1237.99us , P99: 1503.7us , P95: 1391.5us , P90: 1344.7us , Std Dev: 82.9128
+FPS: 807.932, Avg Frame Time: 1237.73us , P99: 1494.8us , P95: 1401.1us , P90: 1342.9us , Std Dev: 89.9249
+FPS: 807.416, Avg Frame Time: 1238.52us , P99: 1533.5us , P95: 1389.8us , P90: 1343.5us , Std Dev: 93.0241
+FPS: 808.259, Avg Frame Time: 1237.23us , P99: 1508.3us , P95: 1374.9us , P90: 1340.6us , Std Dev: 83.6295
+FPS: 806.935, Avg Frame Time: 1239.26us , P99: 1542.7us , P95: 1397.4us , P90: 1346.1us , Std Dev: 90.5996
+FPS: 806.967, Avg Frame Time: 1239.21us , P99: 1506.7us , P95: 1383.2us , P90: 1344us , Std Dev: 84.2573
+FPS: 808.227, Avg Frame Time: 1237.28us , P99: 1511.9us , P95: 1378.6us , P90: 1338.4us , Std Dev: 85.4363
+FPS: 806.8, Avg Frame Time: 1239.46us , P99: 1513us , P95: 1389.9us , P90: 1344.2us , Std Dev: 89.3992
+FPS: 808.152, Avg Frame Time: 1237.39us , P99: 1499us , P95: 1378.1us , P90: 1343.3us , Std Dev: 85.3111
+FPS: 805.702, Avg Frame Time: 1241.15us , P99: 1550.2us , P95: 1388.8us , P90: 1347.7us , Std Dev: 92.1022
+FPS: 808.161, Avg Frame Time: 1237.38us , P99: 1478.4us , P95: 1388.3us , P90: 1339.7us , Std Dev: 81.3982
+FPS: 806.546, Avg Frame Time: 1239.86us , P99: 1479.3us , P95: 1384.2us , P90: 1340.5us , Std Dev: 83.3173
+
+2024-04-26 22:24:55 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 18
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:18 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 105.506, Avg Frame Time: 9478.1us , P99: 9886.4us , P95: 9639.8us , P90: 9546.8us , Std Dev: 6102.18
+FPS: 109.185, Avg Frame Time: 9158.78us , P99: 9541.7us , P95: 9480.4us , P90: 9437.7us , Std Dev: 210.014
+FPS: 109.359, Avg Frame Time: 9144.2us , P99: 9595.8us , P95: 9472us , P90: 9411.4us , Std Dev: 206.138
+FPS: 109.869, Avg Frame Time: 9101.73us , P99: 9603.7us , P95: 9453.8us , P90: 9330.4us , Std Dev: 212.15
+FPS: 110.262, Avg Frame Time: 9069.27us , P99: 9422.9us , P95: 9364us , P90: 9305.9us , Std Dev: 183.508
+FPS: 110.987, Avg Frame Time: 9010.03us , P99: 9441.3us , P95: 9350.9us , P90: 9285.4us , Std Dev: 210.684
+FPS: 111.332, Avg Frame Time: 8982.15us , P99: 9374.4us , P95: 9248.8us , P90: 9217.1us , Std Dev: 186.514
+FPS: 110.94, Avg Frame Time: 9013.9us , P99: 9433.6us , P95: 9262us , P90: 9229.3us , Std Dev: 180.999
+FPS: 110.369, Avg Frame Time: 9060.49us , P99: 9505.8us , P95: 9324.4us , P90: 9293.9us , Std Dev: 180.014
+FPS: 109.915, Avg Frame Time: 9097.9us , P99: 9479.3us , P95: 9362us , P90: 9283.8us , Std Dev: 167.51
+FPS: 109.707, Avg Frame Time: 9115.21us , P99: 9673.1us , P95: 9340.5us , P90: 9314.9us , Std Dev: 189.355
+FPS: 109.493, Avg Frame Time: 9132.98us , P99: 9492.5us , P95: 9426.7us , P90: 9368.8us , Std Dev: 182.916
+FPS: 109.427, Avg Frame Time: 9138.51us , P99: 9565.5us , P95: 9434.3us , P90: 9369us , Std Dev: 189.988
+FPS: 109.2, Avg Frame Time: 9157.53us , P99: 9475.6us , P95: 9434.6us , P90: 9376us , Std Dev: 171.436
+FPS: 109.232, Avg Frame Time: 9154.82us , P99: 9524.1us , P95: 9459us , P90: 9391.1us , Std Dev: 186.893
+FPS: 109.338, Avg Frame Time: 9145.94us , P99: 9630.7us , P95: 9391.9us , P90: 9350.9us , Std Dev: 174.65
+FPS: 110.244, Avg Frame Time: 9070.77us , P99: 9511us , P95: 9350.7us , P90: 9279.5us , Std Dev: 177.439
+FPS: 110.993, Avg Frame Time: 9009.58us , P99: 9513.9us , P95: 9334us , P90: 9240us , Std Dev: 228.782
+FPS: 111.253, Avg Frame Time: 8988.56us , P99: 9396us , P95: 9242.6us , P90: 9204.2us , Std Dev: 190.121
+
+2024-04-26 22:25:15 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 18
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:18 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 127.318, Avg Frame Time: 7854.36us , P99: 8600.7us , P95: 8006.7us , P90: 7905us , Std Dev: 5822.03
+FPS: 133.489, Avg Frame Time: 7491.27us , P99: 8023.5us , P95: 7789.6us , P90: 7748.5us , Std Dev: 216.888
+FPS: 133.559, Avg Frame Time: 7487.33us , P99: 7981.3us , P95: 7789.6us , P90: 7759.4us , Std Dev: 208.518
+FPS: 133.559, Avg Frame Time: 7487.31us , P99: 7901.6us , P95: 7801.1us , P90: 7763us , Std Dev: 198.993
+FPS: 133.5, Avg Frame Time: 7490.64us , P99: 7921.2us , P95: 7803.2us , P90: 7769.7us , Std Dev: 196.89
+FPS: 133.208, Avg Frame Time: 7507.05us , P99: 8257.2us , P95: 7840.5us , P90: 7793us , Std Dev: 252.909
+FPS: 133.265, Avg Frame Time: 7503.86us , P99: 7987.3us , P95: 7800.2us , P90: 7751.2us , Std Dev: 201.565
+FPS: 133.576, Avg Frame Time: 7486.4us , P99: 7972us , P95: 7782us , P90: 7730.6us , Std Dev: 192.03
+FPS: 133.5, Avg Frame Time: 7490.63us , P99: 8005.1us , P95: 7763.7us , P90: 7713.3us , Std Dev: 186.513
+FPS: 133.354, Avg Frame Time: 7498.82us , P99: 7891.9us , P95: 7808.9us , P90: 7761.8us , Std Dev: 203.004
+FPS: 132.867, Avg Frame Time: 7526.32us , P99: 8012.5us , P95: 7885.9us , P90: 7804us , Std Dev: 203.885
+FPS: 133.497, Avg Frame Time: 7490.79us , P99: 7877.5us , P95: 7776.7us , P90: 7735.6us , Std Dev: 189.691
+FPS: 133.655, Avg Frame Time: 7481.92us , P99: 7914.2us , P95: 7787.1us , P90: 7744.3us , Std Dev: 206.411
+FPS: 133.659, Avg Frame Time: 7481.73us , P99: 7993.8us , P95: 7783.5us , P90: 7720.2us , Std Dev: 198.986
+FPS: 133.517, Avg Frame Time: 7489.67us , P99: 7961.3us , P95: 7809.5us , P90: 7734.5us , Std Dev: 194.578
+FPS: 133.571, Avg Frame Time: 7486.64us , P99: 8141.9us , P95: 7799.7us , P90: 7743.3us , Std Dev: 225.325
+FPS: 133.48, Avg Frame Time: 7491.78us , P99: 7851.9us , P95: 7793.9us , P90: 7756us , Std Dev: 193.333
+FPS: 133.575, Avg Frame Time: 7486.41us , P99: 7850.5us , P95: 7802.3us , P90: 7740.5us , Std Dev: 195.752
+FPS: 133.639, Avg Frame Time: 7482.86us , P99: 7884.3us , P95: 7813.9us , P90: 7714.9us , Std Dev: 194.104
+
+2024-04-26 22:25:35 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 18 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:18 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 245.656, Avg Frame Time: 4070.73us , P99: 4335.2us , P95: 4106.8us , P90: 4049.4us , Std Dev: 4582.69
+FPS: 262.177, Avg Frame Time: 3814.22us , P99: 4230.5us , P95: 4054.7us , P90: 3990.6us , Std Dev: 155.937
+FPS: 262.483, Avg Frame Time: 3809.76us , P99: 4192us , P95: 4029.3us , P90: 3957.4us , Std Dev: 126.268
+FPS: 262.365, Avg Frame Time: 3811.49us , P99: 4160.7us , P95: 4032.5us , P90: 3985.6us , Std Dev: 121.812
+FPS: 262.284, Avg Frame Time: 3812.66us , P99: 4162.7us , P95: 4036.8us , P90: 3964.1us , Std Dev: 122.483
+FPS: 261.974, Avg Frame Time: 3817.17us , P99: 4164us , P95: 4044.3us , P90: 4008.6us , Std Dev: 124.34
+FPS: 261.954, Avg Frame Time: 3817.46us , P99: 4177.1us , P95: 4059.1us , P90: 3977.9us , Std Dev: 132.337
+FPS: 262.064, Avg Frame Time: 3815.86us , P99: 4130.7us , P95: 4030.8us , P90: 3972.1us , Std Dev: 123.727
+FPS: 262.238, Avg Frame Time: 3813.33us , P99: 4184.9us , P95: 4027.8us , P90: 3969.8us , Std Dev: 131.651
+FPS: 262.541, Avg Frame Time: 3808.93us , P99: 4112.4us , P95: 4020.8us , P90: 3981us , Std Dev: 128.327
+FPS: 262.675, Avg Frame Time: 3806.99us , P99: 4085.8us , P95: 3998.5us , P90: 3954us , Std Dev: 113.386
+FPS: 262.404, Avg Frame Time: 3810.92us , P99: 4134.8us , P95: 4037.3us , P90: 3971.6us , Std Dev: 121.821
+FPS: 262.471, Avg Frame Time: 3809.94us , P99: 4139.2us , P95: 4042.7us , P90: 3988.7us , Std Dev: 122.798
+FPS: 262.725, Avg Frame Time: 3806.26us , P99: 4122.4us , P95: 4028.7us , P90: 3955.2us , Std Dev: 116.571
+FPS: 262.483, Avg Frame Time: 3809.77us , P99: 4165.5us , P95: 4037.5us , P90: 3976.8us , Std Dev: 133.474
+FPS: 262.47, Avg Frame Time: 3809.96us , P99: 4196.2us , P95: 4030.1us , P90: 3978.6us , Std Dev: 125.547
+FPS: 262.206, Avg Frame Time: 3813.79us , P99: 4184.7us , P95: 4041.7us , P90: 3993.6us , Std Dev: 128.31
+FPS: 262.029, Avg Frame Time: 3816.37us , P99: 4089.6us , P95: 4025.8us , P90: 3975.1us , Std Dev: 113.435
+FPS: 262.142, Avg Frame Time: 3814.73us , P99: 4227.7us , P95: 4038.6us , P90: 3967.2us , Std Dev: 126.092
+
+2024-04-26 22:25:55 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode tess --bladeNumExponent 20
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:tess 
+Key:bladeNumExponent	Value:20 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 30.9137, Avg Frame Time: 32348.1us , P99: 74049us , P95: 36359.9us , P90: 35982.2us , Std Dev: 13691.6
+FPS: 28.3948, Avg Frame Time: 35217.7us , P99: 36775us , P95: 35497.5us , P90: 35437.8us , Std Dev: 411.247
+FPS: 28.4885, Avg Frame Time: 35101.8us , P99: 36012.5us , P95: 35542.1us , P90: 35361.6us , Std Dev: 262.42
+FPS: 28.6473, Avg Frame Time: 34907.3us , P99: 35535.7us , P95: 35270.6us , P90: 35244.5us , Std Dev: 278.772
+FPS: 28.6519, Avg Frame Time: 34901.7us , P99: 35597.4us , P95: 35152.5us , P90: 35090.5us , Std Dev: 220.034
+FPS: 28.7257, Avg Frame Time: 34812.1us , P99: 35117.9us , P95: 35077.6us , P90: 35025.4us , Std Dev: 186.204
+FPS: 28.7252, Avg Frame Time: 34812.7us , P99: 35278.1us , P95: 35237.6us , P90: 35113.7us , Std Dev: 257.986
+FPS: 28.7107, Avg Frame Time: 34830.2us , P99: 35578us , P95: 35269.4us , P90: 35106.1us , Std Dev: 343.131
+FPS: 28.6053, Avg Frame Time: 34958.6us , P99: 35482.3us , P95: 35327us , P90: 35143.3us , Std Dev: 212.574
+FPS: 28.5241, Avg Frame Time: 35058.1us , P99: 35438.5us , P95: 35423.4us , P90: 35341.2us , Std Dev: 208.343
+FPS: 28.3896, Avg Frame Time: 35224.2us , P99: 35676.2us , P95: 35498.1us , P90: 35444.7us , Std Dev: 182.806
+FPS: 28.3128, Avg Frame Time: 35319.7us , P99: 35604.2us , P95: 35575.6us , P90: 35479.8us , Std Dev: 142.538
+FPS: 28.2979, Avg Frame Time: 35338.3us , P99: 35670.6us , P95: 35663.5us , P90: 35584.1us , Std Dev: 184.067
+FPS: 28.3552, Avg Frame Time: 35266.8us , P99: 35709us , P95: 35599.4us , P90: 35541.1us , Std Dev: 246.075
+FPS: 28.4342, Avg Frame Time: 35169us , P99: 35558.7us , P95: 35447us , P90: 35305.6us , Std Dev: 157.094
+FPS: 28.5564, Avg Frame Time: 35018.4us , P99: 35534us , P95: 35510.3us , P90: 35317.8us , Std Dev: 257.325
+FPS: 28.6456, Avg Frame Time: 34909.3us , P99: 35434.6us , P95: 35365us , P90: 35236.4us , Std Dev: 246.237
+FPS: 28.7279, Avg Frame Time: 34809.4us , P99: 35585.5us , P95: 35186us , P90: 35082us , Std Dev: 263.552
+FPS: 28.6944, Avg Frame Time: 34850us , P99: 35224.8us , P95: 35212.6us , P90: 35136.1us , Std Dev: 229.07
+
+2024-04-26 22:26:15 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 20
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:20 
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 36.6943, Avg Frame Time: 27252.2us , P99: 74806.5us , P95: 29583.5us , P90: 29506.6us , Std Dev: 11810
+FPS: 34.7332, Avg Frame Time: 28790.9us , P99: 29169.7us , P95: 29097us , P90: 29018.3us , Std Dev: 180.056
+FPS: 34.7021, Avg Frame Time: 28816.7us , P99: 29292.7us , P95: 29042.5us , P90: 29020.7us , Std Dev: 195.625
+FPS: 34.7271, Avg Frame Time: 28795.9us , P99: 29234.3us , P95: 29171us , P90: 29062.4us , Std Dev: 210.596
+FPS: 34.7569, Avg Frame Time: 28771.3us , P99: 29188.2us , P95: 29084.7us , P90: 29035.5us , Std Dev: 184.811
+FPS: 34.6188, Avg Frame Time: 28886us , P99: 29462.5us , P95: 29236.9us , P90: 29115.6us , Std Dev: 198.038
+FPS: 34.7025, Avg Frame Time: 28816.3us , P99: 29402.5us , P95: 29141us , P90: 29067.9us , Std Dev: 215.972
+FPS: 34.6995, Avg Frame Time: 28818.8us , P99: 29450.9us , P95: 29210.7us , P90: 29170.8us , Std Dev: 229.581
+FPS: 34.7633, Avg Frame Time: 28766us , P99: 29065us , P95: 28956.8us , P90: 28951.8us , Std Dev: 131.862
+FPS: 34.7239, Avg Frame Time: 28798.6us , P99: 29844.7us , P95: 29038.5us , P90: 29029.6us , Std Dev: 244.647
+FPS: 34.6679, Avg Frame Time: 28845.1us , P99: 29481.3us , P95: 29146.8us , P90: 29019.9us , Std Dev: 182.508
+FPS: 34.723, Avg Frame Time: 28799.4us , P99: 29253.4us , P95: 29188us , P90: 29088us , Std Dev: 188.8
+FPS: 34.731, Avg Frame Time: 28792.8us , P99: 29250.4us , P95: 29118.1us , P90: 29094.4us , Std Dev: 220.031
+FPS: 34.7025, Avg Frame Time: 28816.3us , P99: 29206.9us , P95: 29157.1us , P90: 29140.8us , Std Dev: 185.037
+FPS: 34.7339, Avg Frame Time: 28790.3us , P99: 29332.7us , P95: 29033.7us , P90: 29020.8us , Std Dev: 208.194
+FPS: 34.7021, Avg Frame Time: 28816.7us , P99: 29141.7us , P95: 29029.1us , P90: 29007.8us , Std Dev: 163.111
+FPS: 34.7211, Avg Frame Time: 28801us , P99: 29491.2us , P95: 29095us , P90: 29052.4us , Std Dev: 196.388
+FPS: 34.6939, Avg Frame Time: 28823.5us , P99: 29530.9us , P95: 29175.9us , P90: 29095.4us , Std Dev: 238.013
+FPS: 34.725, Avg Frame Time: 28797.7us , P99: 29189.9us , P95: 29104.2us , P90: 29098.2us , Std Dev: 199.103
+
+2024-04-26 22:26:35 - Running command: D:\dev\Vulkan\15672_final_project\CIS565-Fall-2023-Project5-Vulkan-Grass-Rendering\build\src\..\..\bin\Release\vulkan_grass_rendering.exe --drawing-size 1920 1080 --mode mesh --bladeNumExponent 20 --enableMeshShaderCompute
+Output: ArgsParser parsed the following parameters: 
+Key:drawing-size	Value:1920 1080 
+Key:mode	Value:mesh 
+Key:bladeNumExponent	Value:20 
+Key:enableMeshShaderCompute	Value:
+theta: 0.000000, phi: -30.000000, r: 20.000000
+FPS: 70.9042, Avg Frame Time: 14103.5us , P99: 14526.7us , P95: 14463.1us , P90: 14401.9us , Std Dev: 7298.54
+FPS: 71.2215, Avg Frame Time: 14040.7us , P99: 14515.2us , P95: 14315.3us , P90: 14236.5us , Std Dev: 177.989
+FPS: 71.282, Avg Frame Time: 14028.8us , P99: 14496.6us , P95: 14329.9us , P90: 14219.7us , Std Dev: 177.307
+FPS: 71.2513, Avg Frame Time: 14034.8us , P99: 14318.8us , P95: 14292.6us , P90: 14179.5us , Std Dev: 137.499
+FPS: 71.1635, Avg Frame Time: 14052.1us , P99: 14499.8us , P95: 14316.8us , P90: 14235.7us , Std Dev: 176.383
+FPS: 71.1347, Avg Frame Time: 14057.8us , P99: 14435.3us , P95: 14247.6us , P90: 14212.9us , Std Dev: 146.61
+FPS: 71.079, Avg Frame Time: 14068.9us , P99: 14356.5us , P95: 14267.5us , P90: 14233.5us , Std Dev: 135.49
+FPS: 71.1972, Avg Frame Time: 14045.5us , P99: 14405us , P95: 14250.2us , P90: 14217.1us , Std Dev: 148.75
+FPS: 71.1152, Avg Frame Time: 14061.7us , P99: 14596.2us , P95: 14336.8us , P90: 14213.3us , Std Dev: 180.429
+FPS: 71.0829, Avg Frame Time: 14068.1us , P99: 14344.8us , P95: 14304.6us , P90: 14228.6us , Std Dev: 159.161
+FPS: 71.1508, Avg Frame Time: 14054.7us , P99: 14675.1us , P95: 14321.1us , P90: 14269.3us , Std Dev: 195.883
+FPS: 71.1954, Avg Frame Time: 14045.8us , P99: 14543.8us , P95: 14295.2us , P90: 14194.3us , Std Dev: 162.668
+FPS: 71.2243, Avg Frame Time: 14040.1us , P99: 14412.4us , P95: 14345.5us , P90: 14236.3us , Std Dev: 167.52
+FPS: 71.2722, Avg Frame Time: 14030.7us , P99: 14464.4us , P95: 14314.3us , P90: 14230.6us , Std Dev: 189.579
+FPS: 71.2524, Avg Frame Time: 14034.6us , P99: 14419.4us , P95: 14295.3us , P90: 14210.4us , Std Dev: 149.841
+FPS: 71.1332, Avg Frame Time: 14058.1us , P99: 14360us , P95: 14314us , P90: 14263.8us , Std Dev: 158.17
+FPS: 71.2025, Avg Frame Time: 14044.5us , P99: 14400.2us , P95: 14293.6us , P90: 14230.6us , Std Dev: 168.838
+FPS: 71.175, Avg Frame Time: 14049.9us , P99: 14406.8us , P95: 14298.2us , P90: 14225.9us , Std Dev: 152.191
+FPS: 71.115, Avg Frame Time: 14061.7us , P99: 14348.9us , P95: 14276.1us , P90: 14224.9us , Std Dev: 140.371
+
