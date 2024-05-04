@@ -166,14 +166,11 @@ int main(int argc, const char* argv[]) {
     auto argsParser = Utility::ArgsParser(argc, argv);
 	ParseArguments(argsParser);
 
-    static constexpr char* applicationName = "Vulkan Grass Rendering";
+    static const char* applicationName = "Vulkan Grass Rendering";
     InitializeWindow(args.windowSize.first, args.windowSize.second, applicationName);
 
     unsigned int glfwExtensionCount = 0;
     const char** glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-
-    // add_instance_extension
-    VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME;
 
     Instance* instance = new Instance(applicationName, glfwExtensionCount, glfwExtensions);
 

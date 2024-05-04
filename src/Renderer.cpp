@@ -32,7 +32,13 @@ Renderer::Renderer(Device* device, SwapChain* swapChain, Scene* scene, Camera* c
 	CreateGraphicsPipeline();
 	CreateGrassPipeline();
 	CreateComputePipeline();
-	vkCmdDrawMeshTasksEXTFunc = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdDrawMeshTasksEXT"));
+	vkCmdDrawMeshTasksEXT = reinterpret_cast<PFN_vkCmdDrawMeshTasksEXT>(vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdDrawMeshTasksEXT"));
+
+	//https://docs.vulkan.org/samples/latest/samples/extensions/debug_utils/README.html
+	vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdBeginDebugUtilsLabelEXT");
+	vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdEndDebugUtilsLabelEXT");
+	vkCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetDeviceProcAddr(device->GetVkDevice(), "vkCmdInsertDebugUtilsLabelEXT");
+
 	CreateGrassMeshShaderPipeline();
 	RecordCommandBuffers();
 
@@ -1125,6 +1131,18 @@ void Renderer::RecordCommandBuffers() {
 
 		if (args.mode == "tess" || args.mode == "both")
 		{
+
+
+			VkDebugUtilsLabelEXT labelInfo = {
+				.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
+				.pLabelName = "Tessellation Shader",
+				.color = { 0.0f, 1.0f, 0.0f, 1.0f },
+			};
+			vkCmdBeginDebugUtilsLabelEXT(commandBuffers[i], &labelInfo);
+
+			// Bind pipelines, descriptor sets, draw vertices, etc.
+
+
 			// Bind the grass pipeline
 			vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassPipeline);
 
@@ -1139,10 +1157,18 @@ void Renderer::RecordCommandBuffers() {
 				// Draw
 				vkCmdDrawIndirect(commandBuffers[i], scene->GetBlades()[j]->GetNumBladesBuffer(), 0, 1, sizeof(BladeDrawIndirect));
 			}
+			vkCmdEndDebugUtilsLabelEXT(commandBuffers[i]);
 
 		}
 		if (args.mode == "mesh" || args.mode == "both")
 		{
+			VkDebugUtilsLabelEXT labelInfo = {
+				.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT,
+				.pLabelName = "Mesh Shader",
+				.color = { 1.0f, 0.0f, 0.0f, 1.0f },
+			};
+			vkCmdBeginDebugUtilsLabelEXT(commandBuffers[i], &labelInfo);
+
 			//// Bind the mesh shader pipeline
 
 			vkCmdBindPipeline(commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, grassMeshShaderPipeline);
@@ -1161,8 +1187,9 @@ void Renderer::RecordCommandBuffers() {
 				// Draw
 				//uint32_t groupCountX = (NUM_BLADES + WORKGROUP_SIZE - 1) / WORKGROUP_SIZE;
 #define BLADE_PER_THREAD 1
-				vkCmdDrawMeshTasksEXTFunc(commandBuffers[i], args.bladeNum/BLADE_PER_THREAD, 1, 1);
+				vkCmdDrawMeshTasksEXT(commandBuffers[i], args.bladeNum/BLADE_PER_THREAD, 1, 1);
 			}
+			vkCmdEndDebugUtilsLabelEXT(commandBuffers[i]);
 		}
 
 		// End render pass

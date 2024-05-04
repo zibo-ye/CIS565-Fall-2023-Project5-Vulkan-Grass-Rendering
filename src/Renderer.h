@@ -32,7 +32,12 @@ public:
     void CreateGrassPipeline();
     void CreateComputePipeline();
 
-	PFN_vkCmdDrawMeshTasksEXT vkCmdDrawMeshTasksEXTFunc{ VK_NULL_HANDLE };
+	PFN_vkCmdDrawMeshTasksEXT vkCmdDrawMeshTasksEXT{ VK_NULL_HANDLE };
+
+	PFN_vkCmdBeginDebugUtilsLabelEXT vkCmdBeginDebugUtilsLabelEXT{ VK_NULL_HANDLE };
+	PFN_vkCmdEndDebugUtilsLabelEXT vkCmdEndDebugUtilsLabelEXT{ VK_NULL_HANDLE };
+	PFN_vkCmdInsertDebugUtilsLabelEXT vkCmdInsertDebugUtilsLabelEXT{ VK_NULL_HANDLE };
+
 	void CreateGrassMeshShaderPipeline();
 
     void CreateFrameResources();
